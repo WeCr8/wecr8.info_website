@@ -4,82 +4,59 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header class="app-header">
-    <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav class="navigation">
-        <RouterLink to="/" exact-active-class="active">Home</RouterLink>
-        <RouterLink to="/about" exact-active-class="active">About</RouterLink>
-      </nav>
-    </div>
+    <img alt="WeCr8 Logo" class="logo" src="@/assets/WeCr8 Solutions.png" width="125" height="125" />
+    <nav class="navigation">
+      <RouterLink to="/" exact-active-class="active">Home</RouterLink>
+      <RouterLink to="/about" exact-active-class="active">About</RouterLink>
+    </nav>
   </header>
 
-  <RouterView />
+  <main class="main-content">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
 .app-header {
-  line-height: 1.5;
-  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #1b365d;
+  padding: 1rem;
 }
 
 .logo {
-  margin: 0 auto 2rem;
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .navigation {
-  font-size: 14px;
-  margin-top: 1rem;
   text-align: center;
+  font-size: 1rem;
 }
 
 .navigation a {
   display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-  color: inherit;
+  color: #fff;
   text-decoration: none;
 }
 
-.navigation a:first-of-type {
-  border-left: none;
-}
-
 .navigation a.active {
-  color: var(--color-text);
   font-weight: bold;
+  color: #f05727;
 }
 
 @media (min-width: 1024px) {
   .app-header {
     flex-direction: row;
     justify-content: space-between;
-    padding: 1rem 2rem;
   }
 
   .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  .wrapper {
-    flex-direction: row;
-    align-items: center;
+    margin: 0;
   }
 
   .navigation {
-    margin-top: 0;
-    font-size: 1rem;
     margin-left: 2rem;
   }
 }
