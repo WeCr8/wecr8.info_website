@@ -2,41 +2,38 @@
   <section class="service-page">
     <div class="container">
       <!-- Page Title -->
-      <h1 class="title">Smart Tooling & Zoller Integration</h1>
+      <h1 class="title">Training & Workforce Development</h1>
 
       <!-- Introductory Statement -->
       <p class="intro">
-        At WeCr8 Solutions, we bring structure to chaos. Our tooling solutions combine digital tool
-        libraries with Zoller presetting systems to help you standardize, organize, and scale with
-        precision.
+        We empower machinists and programmers by teaching modern CNC, CAM, and smart manufacturing
+        principles through practical, hands-on training.
       </p>
 
-      <!-- Features List -->
+      <!-- Training Topics -->
       <div class="content">
         <ul class="feature-list">
-          <li>✔ Centralized, structured tool databases</li>
-          <li>✔ Seamless integration with Zoller presetters</li>
-          <li>✔ CAM compatibility: Mastercam, Fusion, Siemens NX</li>
-          <li>✔ Full tooling metadata: Tool ID, Holder, Projection, Description</li>
-          <li>✔ Tool card automation and system export</li>
+          <li>✔ Modern CNC machine operation & 5-axis theory</li>
+          <li>✔ Tool library building & Zoller system instruction</li>
+          <li>✔ CAM programming using Mastercam & Fusion</li>
+          <li>✔ Blueprint reading, GD&T, and measurement skills</li>
+          <li>✔ Custom training for job shops & OEMs</li>
         </ul>
 
         <!-- Call to Action -->
-        <RouterLink class="cta" to="/contact"> Get Started with Smart Tooling </RouterLink>
+        <RouterLink class="cta" to="/contact"> Request a Training Program </RouterLink>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-// Vue Router Link used for navigation
 import { RouterLink } from 'vue-router'
 </script>
 
 <style scoped>
 @import '../assets/main.css';
 
-/* Scoped Enhancements for This View */
 .service-page {
   padding: 4rem 1rem;
   background-color: var(--color-light);
@@ -75,12 +72,14 @@ import { RouterLink } from 'vue-router'
   margin-bottom: 2rem;
   list-style: none;
 }
+
 .feature-list li {
   margin-bottom: 0.75rem;
   font-size: 1rem;
   position: relative;
   padding-left: 1.25rem;
 }
+
 .feature-list li::before {
   content: '✔';
   position: absolute;
@@ -99,6 +98,7 @@ import { RouterLink } from 'vue-router'
   text-decoration: none;
   transition: background-color 0.3s;
 }
+
 .cta:hover {
   background-color: #d9481f;
 }

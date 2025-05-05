@@ -1,34 +1,53 @@
+<script setup>
+import { RouterLink } from 'vue-router'
+</script>
+
 <template>
   <div class="home">
-    <!-- Hero Section -->
+    <!-- 🚀 Hero Section -->
     <section class="hero section text-center">
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-heading">
-        WeCr8 Solutions: Precision. Automation. Results.
-      </h1>
-      <p class="text-lg max-w-2xl mx-auto mb-6 text-muted">
-        Driving innovation across aerospace, energy, and advanced manufacturing with smart tooling,
-        automation, and workforce education.
-      </p>
-      <button class="cta">Request a Free Consultation</button>
+      <div class="container">
+        <h1 class="hero-title">
+          WeCr8 Solutions: Precision. Automation. Results.
+        </h1>
+        <p class="hero-subtext">
+          Driving innovation across aerospace, energy, and advanced manufacturing with smart
+          tooling, automation, and workforce education.
+        </p>
+        <RouterLink to="/contact" class="cta" aria-label="Request a free consultation with WeCr8 Solutions">
+          Request a Free Consultation
+        </RouterLink>
+      </div>
     </section>
 
-    <!-- What We Do Section -->
+    <!-- 🛠️ What We Do Section -->
     <section class="section section-light text-center">
       <div class="container">
-        <h2 class="mb-6">What We Do</h2>
+        <h2 class="text-3xl font-bold text-heading mb-8">What We Do</h2>
         <div class="grid-cards">
-          <div class="card">
-            <h3>Smart Tooling & Zoller Integration</h3>
-            <p>Digital tool libraries, Zoller setup, and CAM alignment.</p>
-          </div>
-          <div class="card">
-            <h3>Automation & CNC Optimization</h3>
-            <p>Workflow automation and CNC machine efficiency tuning.</p>
-          </div>
-          <div class="card">
-            <h3>Training & Workforce Development</h3>
-            <p>Educating machinists and programmers with modern skills.</p>
-          </div>
+          <!-- 🔧 Smart Tooling -->
+          <RouterLink to="/services/tool-library" class="card-link" aria-label="Smart Tooling and Zoller Integration">
+            <div class="card">
+              <h3>Smart Tooling & Zoller Integration</h3>
+              <p>Digital tool libraries, Zoller setup, and CAM alignment.</p>
+            </div>
+          </RouterLink>
+
+          <!-- 🤖 CNC Automation -->
+          <RouterLink to="/services/cnc-automation" class="card-link" aria-label="Automation and CNC Optimization">
+            <div class="card">
+              <h3>Automation & CNC Optimization</h3>
+              <p>Workflow automation and CNC machine efficiency tuning.</p>
+            </div>
+          </RouterLink>
+
+          <!-- 🎓 Training -->
+          <RouterLink to="/services/training" class="card-link" aria-label="Training and Workforce Development">
+            <div class="card">
+              <h3>Training & Workforce Development</h3>
+              <p>Educating machinists and programmers with modern skills.</p>
+            </div>
+          </RouterLink>
         </div>
       </div>
     </section>
@@ -36,21 +55,30 @@
 </template>
 
 <style scoped>
+/* 🎨 Hero Section Styles */
 .hero {
   background-color: var(--color-primary);
+  padding: 5rem 1rem 6rem;
   color: white;
-  padding: 4rem 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Improve contrast */
 }
 
-.text-heading {
-  color: var(--color-heading);
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #ffffff;
 }
 
-.text-muted {
-  color: var(--color-muted);
+.hero-subtext {
+  font-size: 1.125rem;
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+  color: #f0f0f0;
+  opacity: 0.95;
 }
 
-/* Card Grid */
+/* 📦 Service Card Grid Layout */
 .grid-cards {
   display: grid;
   gap: 2rem;
@@ -58,11 +86,23 @@
   margin-top: 2rem;
 }
 
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.card-link:hover {
+  transform: translateY(-5px);
+}
+
 .card {
   background: white;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
   text-align: left;
 }
 .card h3 {
@@ -71,11 +111,17 @@
 }
 .card p {
   color: var(--color-text);
+  font-size: 0.95rem;
 }
 
+/* 📱 Responsive Grid */
 @media (min-width: 768px) {
   .grid-cards {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero-title {
+    font-size: 3rem;
   }
 }
 </style>

@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-// 📦 Eagerly import the homepage (since it's visited most)
+// 📦 Eager-load most visited page
 import HomeView from '../views/HomeView.vue'
 
 /**
- * 🧭 Route Definitions
- * Use lazy-loading (dynamic imports) for routes that are not hit immediately.
- * This keeps the initial load fast and defers parsing for less critical views.
+ * 🗺️ Route Definitions
+ * Lazy-load views when possible to improve performance.
  */
 const routes = [
+  // 🏠 Home
   {
     path: '/',
     name: 'Home',
@@ -18,20 +18,14 @@ const routes = [
       description: 'Smart Tooling, Automation & Training for Modern Manufacturing',
     },
   },
+
+  // 📄 Static Pages
   {
     path: '/about',
     name: 'About',
     component: () => import('../views/AboutView.vue'),
     meta: {
       title: 'About WeCr8 Solutions',
-    },
-  },
-  {
-    path: '/services',
-    name: 'Services',
-    component: () => import('../views/ServicesView.vue'),
-    meta: {
-      title: 'Our Services – WeCr8 Solutions',
     },
   },
   {
@@ -51,7 +45,17 @@ const routes = [
     },
   },
 
-  // 🛠 Future Services (predefined paths, views can be scaffolded later)
+  // 🛠️ Core Services Page
+  {
+    path: '/services',
+    name: 'Services',
+    component: () => import('../views/ServicesView.vue'),
+    meta: {
+      title: 'Our Services – WeCr8 Solutions',
+    },
+  },
+
+  // ⚙️ Service-Specific Detail Views
   {
     path: '/services/tool-library',
     name: 'ToolLibrary',
@@ -69,6 +73,16 @@ const routes = [
     },
   },
   {
+    path: '/services/training',
+    name: 'Training',
+    component: () => import('../views/TrainingView.vue'),
+    meta: {
+      title: 'Training & Workforce Development – WeCr8 Solutions',
+    },
+  },
+
+  // 📦 Optional (future) service placeholders
+  {
     path: '/services/process-optimization',
     name: 'ProcessOptimization',
     component: () => import('../views/ProcessOptimizationView.vue'),
@@ -85,7 +99,7 @@ const routes = [
     },
   },
 
-  // ❌ Catch-All Route: Redirect unknown paths to a NotFound view
+  // 🚫 404 Fallback
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
@@ -98,7 +112,7 @@ const routes = [
 
 /**
  * 🚦 Router Setup
- * Uses HTML5 history mode for clean URLs (no hash #).
+ * Clean URLs using HTML5 history mode.
  */
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -106,8 +120,8 @@ const router = createRouter({
 })
 
 /**
- * 🧠 Global Navigation Guard
- * Automatically set the page title based on meta fields.
+ * 🧠 Meta Title Handler
+ * Dynamically updates page title after each route change.
  */
 router.afterEach((to) => {
   if (to.meta?.title) {
