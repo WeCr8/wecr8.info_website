@@ -1,11 +1,23 @@
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const menuOpen = ref(false)
+const searchQuery = ref('')
+const router = useRouter()
 
+function toggleMenu() {
+  menuOpen.value = !menuOpen.value
+}
 function closeMenu() {
   menuOpen.value = false
+}
+function performSearch() {
+  if (searchQuery.value.trim()) {
+    router.push({ name: 'search', query: { q: searchQuery.value.trim() } })
+    searchQuery.value = ''
+    closeMenu()
+  }
 }
 </script>
 
@@ -13,7 +25,7 @@ function closeMenu() {
   <header class="navbar">
     <div class="navbar-container">
       <!-- Logo -->
-      <RouterLink to="/" class="logo">
+      <RouterLink to="/" class="logo" @click="closeMenu">
         <img src="@/assets/logo.png" alt="WeCr8 Logo" />
       </RouterLink>
 
@@ -27,42 +39,53 @@ function closeMenu() {
 
       <!-- Desktop Search -->
       <div class="search-box desktop-only">
-        <input type="text" placeholder="Search..." />
-        <button aria-label="Search">🔍</button>
+        <input
+          type="text"
+          v-model="searchQuery"
+          placeholder="Search..."
+          @keyup.enter="performSearch"
+        />
+        <button @click="performSearch" aria-label="Search">🔍</button>
       </div>
 
-      <!-- Hamburger (Mobile Only) -->
-      <button class="hamburger mobile-only" @click="menuOpen = !menuOpen" aria-label="Toggle Menu">
-        ☰
-      </button>
+      <!-- Hamburger (Mobile) -->
+      <button class="hamburger mobile-only" @click="toggleMenu" aria-label="Toggle Menu">☰</button>
     </div>
 
-    <!-- Drawer (Mobile Only) -->
-    <div class="drawer mobile-only" :class="{ open: menuOpen }">
-      <nav class="drawer-nav">
-        <button class="close-btn" @click="closeMenu" aria-label="Close Menu">✕</button>
-        <RouterLink to="/" exact-active-class="active" @click="closeMenu">Home</RouterLink>
-        <RouterLink to="/about" exact-active-class="active" @click="closeMenu">About</RouterLink>
-        <RouterLink to="/services" exact-active-class="active" @click="closeMenu"
-          >Services</RouterLink
-        >
-        <RouterLink to="/contact" exact-active-class="active" @click="closeMenu"
-          >Contact</RouterLink
-        >
+    <!-- Drawer (Mobile) -->
+    <transition name="slide">
+      <div class="drawer mobile-only" v-if="menuOpen">
+        <nav class="drawer-nav">
+          <button class="close-btn" @click="closeMenu" aria-label="Close Menu">✕</button>
+          <RouterLink to="/" @click="closeMenu" exact-active-class="active">Home</RouterLink>
+          <RouterLink to="/about" @click="closeMenu" exact-active-class="active">About</RouterLink>
+          <RouterLink to="/services" @click="closeMenu" exact-active-class="active"
+            >Services</RouterLink
+          >
+          <RouterLink to="/contact" @click="closeMenu" exact-active-class="active"
+            >Contact</RouterLink
+          >
 
-        <div class="search-box mt-4">
-          <input type="text" placeholder="Search..." />
-          <button aria-label="Search">🔍</button>
-        </div>
-      </nav>
-    </div>
+          <div class="search-box mt-4">
+            <input
+              type="text"
+              v-model="searchQuery"
+              placeholder="Search..."
+              @keyup.enter="performSearch"
+            />
+            <button @click="performSearch" aria-label="Search">🔍</button>
+          </div>
+        </nav>
+      </div>
+    </transition>
 
-    <!-- Mobile Overlay -->
+    <!-- Overlay -->
     <div class="overlay mobile-only" v-if="menuOpen" @click="closeMenu"></div>
   </header>
 </template>
 
 <style scoped>
+/* Base Navbar */
 .navbar {
   background-color: var(--color-background);
   border-bottom: 1px solid var(--color-border);
@@ -71,7 +94,6 @@ function closeMenu() {
   top: 0;
   z-index: 1000;
 }
-
 .navbar-container {
   display: flex;
   align-items: center;
@@ -81,8 +103,9 @@ function closeMenu() {
   flex-wrap: wrap;
 }
 
+/* Logo */
 .logo img {
-  height: 60px;
+  height: 64px;
   width: auto;
   transition: transform 0.3s ease;
 }
@@ -90,16 +113,15 @@ function closeMenu() {
   transform: scale(1.05);
 }
 
-/* Nav links (desktop) */
+/* Desktop Nav */
 .nav-links {
   display: flex;
   gap: 1.5rem;
 }
 .nav-links a {
   color: var(--color-primary);
-  text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
+  text-decoration: none;
 }
 .nav-links a:hover,
 .nav-links .active {
@@ -107,7 +129,7 @@ function closeMenu() {
   text-decoration: underline;
 }
 
-/* Search box (desktop) */
+/* Search Box */
 .search-box {
   display: flex;
   align-items: center;
@@ -119,7 +141,7 @@ function closeMenu() {
   padding: 0.4rem 0.6rem;
   border: none;
   outline: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   width: 140px;
 }
 .search-box button {
@@ -131,22 +153,27 @@ function closeMenu() {
   font-size: 0.9rem;
 }
 
-/* Drawer (mobile only) */
+/* Hamburger */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+/* Drawer */
 .drawer {
   position: fixed;
   top: 0;
-  right: -100%;
+  right: 0;
   width: 75%;
   max-width: 300px;
   height: 100%;
-  background-color: var(--color-background);
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  background: var(--color-background);
+  box-shadow: -2px 0 6px rgba(0, 0, 0, 0.25);
   padding: 1.5rem;
-  transition: right 0.3s ease;
   z-index: 1100;
-}
-.drawer.open {
-  right: 0;
 }
 .drawer-nav {
   display: flex;
@@ -155,12 +182,11 @@ function closeMenu() {
 }
 .drawer-nav a {
   color: var(--color-primary);
-  font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
 }
-.drawer-nav a.active,
-.drawer-nav a:hover {
+.drawer-nav a:hover,
+.drawer-nav a.active {
   color: var(--color-accent);
   text-decoration: underline;
 }
@@ -173,7 +199,7 @@ function closeMenu() {
   cursor: pointer;
 }
 
-/* Overlay (mobile) */
+/* Overlay */
 .overlay {
   position: fixed;
   top: 0;
@@ -184,7 +210,7 @@ function closeMenu() {
   z-index: 1090;
 }
 
-/* Visibility Utilities */
+/* Visibility */
 .mobile-only {
   display: none;
 }
@@ -192,6 +218,7 @@ function closeMenu() {
   display: flex;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .mobile-only {
     display: block;
@@ -199,5 +226,15 @@ function closeMenu() {
   .desktop-only {
     display: none;
   }
+}
+
+/* Transition */
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease;
+}
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(100%);
 }
 </style>

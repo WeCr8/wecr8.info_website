@@ -1,15 +1,35 @@
 <template>
-  <div class="section-light section text-center">
-    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-heading">About WeCr8 Solutions</h1>
-    <p class="max-w-2xl mx-auto text-muted mb-6">
-      Founded by seasoned professionals from aerospace and advanced manufacturing, WeCr8 Solutions
-      is built to modernize shop floors and empower the next generation of makers.
+  <section class="section container text-center">
+    <h1 class="text-4xl font-extrabold text-heading mb-6">About WeCr8 Solutions</h1>
+    <p class="text-lg text-muted max-w-3xl mx-auto mb-10">
+      WeCr8 Solutions helps manufacturers modernize operations through automation, smart tooling systems, and precision workflow integration.
     </p>
 
-    <ul class="list-none max-w-xl mx-auto text-left space-y-2">
-      <li>✔ Decades of hands-on industry experience</li>
-      <li>✔ Deep focus on automation and lean processes</li>
-      <li>✔ Passion for education, upskilling, and workforce development</li>
-    </ul>
-  </div>
+    <div class="grid md:grid-cols-3 gap-8 text-left">
+      <div class="value-box">
+        <h3 class="text-xl font-semibold text-heading mb-2">🛠 Smart Tooling Systems</h3>
+        <p class="text-muted">
+          We build organized tool libraries and digital systems that power Zoller integration and CAM accuracy.
+        </p>
+      </div>
+      <div class="value-box">
+        <h3 class="text-xl font-semibold text-heading mb-2">🤖 Workflow Automation</h3>
+        <p class="text-muted">
+          Streamline your processes with CNC automation, DNC setup, and data-connected machines.
+        </p>
+      </div>
+      <div class="value-box">
+        <h3 class="text-xl font-semibold text-heading mb-2">📈 Operational Optimization</h3>
+        <p class="text-muted">
+          We analyze your manufacturing environment and design solutions that improve efficiency, consistency, and output.
+        </p>
+      </div>
+    </div>
+  </section>
 </template>
+
+<style scoped>
+.value-box p {
+  font-size: 0.95rem;
+}
+</style>
