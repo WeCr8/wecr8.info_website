@@ -1,38 +1,96 @@
 <!-- src/components/Navbar.vue -->
 <script setup>
-import { ref } from 'vue'
-
-const dropdownOpen = ref(false)
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <header class="bg-[#1b365d] text-white fixed top-0 left-0 right-0 z-50 shadow-md">
-    <div class="container mx-auto flex items-center justify-between py-3 px-4 max-w-7xl">
+  <header class="navbar">
+    <div class="navbar-container">
       <!-- Logo -->
-      <RouterLink to="/">
-        <img src="@/assets/logo.png" alt="WeCr8 Logo" class="h-10 w-auto" />
+      <RouterLink to="/" class="logo">
+        <img src="@/assets/logo.png" alt="WeCr8 Logo" />
       </RouterLink>
 
       <!-- Navigation Links -->
-      <nav class="flex items-center space-x-8 text-sm font-medium">
-        <RouterLink to="/about" class="hover:underline">About</RouterLink>
-
-        <!-- Dropdown -->
-        <div class="relative" @mouseenter="dropdownOpen = true" @mouseleave="dropdownOpen = false">
-          <span class="cursor-pointer hover:underline">Services</span>
-          <ul
-            v-if="dropdownOpen"
-            class="absolute top-full mt-2 bg-white text-[#1b365d] shadow-md rounded-md w-48 py-2 z-10"
-          >
-            <li><RouterLink to="/smart-tooling" class="block px-4 py-2 hover:bg-gray-100">Smart Tooling</RouterLink></li>
-            <li><RouterLink to="/automation" class="block px-4 py-2 hover:bg-gray-100">Automation</RouterLink></li>
-            <li><RouterLink to="/training" class="block px-4 py-2 hover:bg-gray-100">Training</RouterLink></li>
-          </ul>
-        </div>
-
-        <RouterLink to="/contact" class="hover:underline">Contact</RouterLink>
-        <a href="https://careers.wecr8.fun" class="hover:underline" target="_blank">Careers</a>
+      <nav class="nav-links">
+        <RouterLink to="/" exact-active-class="active">Home</RouterLink>
+        <RouterLink to="/about" exact-active-class="active">About</RouterLink>
+        <RouterLink to="/services" exact-active-class="active">Services</RouterLink>
+        <RouterLink to="/contact" exact-active-class="active">Contact</RouterLink>
       </nav>
+
+      <!-- Search -->
+      <div class="search-box">
+        <input type="text" placeholder="Search..." />
+        <button aria-label="Search">🔍</button>
+      </div>
     </div>
   </header>
 </template>
+
+<style>
+.navbar {
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.75rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+  text-decoration: underline;
+  color: var(--color-accent);
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.search-box input {
+  padding: 0.4rem 0.6rem;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  width: 140px;
+}
+
+.search-box button {
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+</style>
