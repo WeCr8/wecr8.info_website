@@ -7,26 +7,33 @@ import { RouterLink } from 'vue-router'
     <!-- 🚀 Hero Section -->
     <section class="hero section text-center">
       <div class="container">
-        <h1 class="hero-title">
-          WeCr8 Solutions: Precision. Automation. Results.
-        </h1>
+        <h1 class="hero-title">WeCr8 Solutions: Precision. Automation. Results.</h1>
         <p class="hero-subtext">
           Driving innovation across aerospace, energy, and advanced manufacturing with smart
           tooling, automation, and workforce education.
         </p>
-        <RouterLink to="/contact" class="cta" aria-label="Request a free consultation with WeCr8 Solutions">
+        <RouterLink
+          to="/contact"
+          class="cta"
+          aria-label="Request a free consultation with WeCr8 Solutions"
+        >
           Request a Free Consultation
         </RouterLink>
       </div>
     </section>
 
-    <!-- 🛠️ What We Do Section -->
+    <!-- 🛠️ What We Do -->
     <section class="section section-light text-center">
       <div class="container">
         <h2 class="text-3xl font-bold text-heading mb-8">What We Do</h2>
+
         <div class="grid-cards">
           <!-- 🔧 Smart Tooling -->
-          <RouterLink to="/services/tool-library" class="card-link" aria-label="Smart Tooling and Zoller Integration">
+          <RouterLink
+            to="/services/tool-library"
+            class="card-link"
+            aria-label="Smart Tooling and Zoller Integration"
+          >
             <div class="card">
               <h3>Smart Tooling & Zoller Integration</h3>
               <p>Digital tool libraries, Zoller setup, and CAM alignment.</p>
@@ -34,15 +41,23 @@ import { RouterLink } from 'vue-router'
           </RouterLink>
 
           <!-- 🤖 CNC Automation -->
-          <RouterLink to="/services/cnc-automation" class="card-link" aria-label="Automation and CNC Optimization">
+          <RouterLink
+            to="/services/cnc-automation"
+            class="card-link"
+            aria-label="Automation and CNC Optimization"
+          >
             <div class="card">
               <h3>Automation & CNC Optimization</h3>
               <p>Workflow automation and CNC machine efficiency tuning.</p>
             </div>
           </RouterLink>
 
-          <!-- 🎓 Training -->
-          <RouterLink to="/services/training" class="card-link" aria-label="Training and Workforce Development">
+          <!-- 🎓 Workforce Training -->
+          <RouterLink
+            to="/services/training"
+            class="card-link"
+            aria-label="Training and Workforce Development"
+          >
             <div class="card">
               <h3>Training & Workforce Development</h3>
               <p>Educating machinists and programmers with modern skills.</p>
@@ -55,19 +70,19 @@ import { RouterLink } from 'vue-router'
 </template>
 
 <style scoped>
-/* 🎨 Hero Section Styles */
+/* 🌌 Hero Section */
 .hero {
   background-color: var(--color-primary);
   padding: 5rem 1rem 6rem;
   color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Improve contrast */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .hero-title {
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  color: #ffffff;
+  color: #fff;
 }
 
 .hero-subtext {
@@ -78,7 +93,7 @@ import { RouterLink } from 'vue-router'
   opacity: 0.95;
 }
 
-/* 📦 Service Card Grid Layout */
+/* 📦 Service Cards */
 .grid-cards {
   display: grid;
   gap: 2rem;
@@ -94,6 +109,7 @@ import { RouterLink } from 'vue-router'
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
+
 .card-link:hover {
   transform: translateY(-5px);
 }
@@ -105,16 +121,18 @@ import { RouterLink } from 'vue-router'
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
   text-align: left;
 }
+
 .card h3 {
   margin-bottom: 0.75rem;
   color: var(--color-heading);
 }
+
 .card p {
   color: var(--color-text);
   font-size: 0.95rem;
 }
 
-/* 📱 Responsive Grid */
+/* 📱 Responsive Adjustments */
 @media (min-width: 768px) {
   .grid-cards {
     grid-template-columns: repeat(3, 1fr);

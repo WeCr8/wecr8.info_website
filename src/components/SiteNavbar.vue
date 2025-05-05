@@ -9,52 +9,67 @@ const router = useRouter()
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
 }
+
 function closeMenu() {
   menuOpen.value = false
 }
+
+let debounceTimer = null
 function performSearch() {
-  if (searchQuery.value.trim()) {
-    router.push({ name: 'search', query: { q: searchQuery.value.trim() } })
-    searchQuery.value = ''
-    closeMenu()
-  }
+  clearTimeout(debounceTimer)
+  debounceTimer = setTimeout(() => {
+    const query = searchQuery.value.trim()
+    if (query) {
+      router.push({ name: 'Search', query: { q: query } })
+      searchQuery.value = ''
+      closeMenu()
+    }
+  }, 300)
 }
 </script>
 
 <template>
   <header class="navbar">
     <div class="navbar-container">
-      <!-- Logo -->
+      <!-- 🔗 Logo -->
       <RouterLink to="/" class="logo" @click="closeMenu">
-        <img src="@/assets/logo.png" alt="WeCr8 Logo" />
+        <img src="@/assets/logo.png" alt="WeCr8 Solutions Logo" />
       </RouterLink>
 
-      <!-- Desktop Nav -->
-      <nav class="nav-links desktop-only">
+      <!-- 🧭 Desktop Navigation -->
+      <nav class="nav-links desktop-only" aria-label="Main Navigation">
         <RouterLink to="/" exact-active-class="active">Home</RouterLink>
         <RouterLink to="/about" exact-active-class="active">About</RouterLink>
         <RouterLink to="/services" exact-active-class="active">Services</RouterLink>
         <RouterLink to="/contact" exact-active-class="active">Contact</RouterLink>
       </nav>
 
-      <!-- Desktop Search -->
-      <div class="search-box desktop-only">
+      <!-- 🔍 Desktop Search -->
+      <div class="search-box desktop-only" role="search">
         <input
           type="text"
           v-model="searchQuery"
           placeholder="Search..."
           @keyup.enter="performSearch"
+          aria-label="Search"
         />
-        <button @click="performSearch" aria-label="Search">🔍</button>
+        <button @click="performSearch" aria-label="Submit Search">🔍</button>
       </div>
 
-      <!-- Hamburger (Mobile) -->
-      <button class="hamburger mobile-only" @click="toggleMenu" aria-label="Toggle Menu">☰</button>
+      <!-- 🍔 Hamburger (Mobile) -->
+      <button
+        class="hamburger mobile-only"
+        @click="toggleMenu"
+        aria-label="Toggle Mobile Navigation"
+        :aria-expanded="menuOpen.toString()"
+      >
+        ☰
+      </button>
     </div>
 
-    <!-- Drawer (Mobile) -->
+    <!-- 📱 Mobile Drawer Menu -->
     <transition name="slide">
-      <div class="drawer mobile-only" v-if="menuOpen">
+      <aside class="drawer mobile-only" v-if="menuOpen" role="dialog" aria-label="Mobile Menu">
         <nav class="drawer-nav">
           <button class="close-btn" @click="closeMenu" aria-label="Close Menu">✕</button>
           <RouterLink to="/" @click="closeMenu" exact-active-class="active">Home</RouterLink>
@@ -66,26 +81,31 @@ function performSearch() {
             >Contact</RouterLink
           >
 
-          <div class="search-box mt-4">
+          <div class="search-box mt-4" role="search">
             <input
               type="text"
               v-model="searchQuery"
               placeholder="Search..."
               @keyup.enter="performSearch"
+              aria-label="Search"
             />
-            <button @click="performSearch" aria-label="Search">🔍</button>
+            <button @click="performSearch" aria-label="Submit Search">🔍</button>
           </div>
         </nav>
-      </div>
+      </aside>
     </transition>
 
-    <!-- Overlay -->
+    <!-- 🔲 Dimmed Overlay -->
     <div class="overlay mobile-only" v-if="menuOpen" @click="closeMenu"></div>
   </header>
 </template>
 
 <style scoped>
-/* Base Navbar */
+/* ============================================================
+   WeCr8 Solutions – Navigation Bar
+   ============================================================ */
+
+/* 🧱 Base Structure */
 .navbar {
   background-color: var(--color-background);
   border-bottom: 1px solid var(--color-border);
@@ -103,7 +123,7 @@ function performSearch() {
   flex-wrap: wrap;
 }
 
-/* Logo */
+/* 🔗 Logo */
 .logo img {
   height: 64px;
   width: auto;
@@ -113,7 +133,7 @@ function performSearch() {
   transform: scale(1.05);
 }
 
-/* Desktop Nav */
+/* 🧭 Nav Links (Desktop) */
 .nav-links {
   display: flex;
   gap: 1.5rem;
@@ -129,7 +149,7 @@ function performSearch() {
   text-decoration: underline;
 }
 
-/* Search Box */
+/* 🔍 Search Input */
 .search-box {
   display: flex;
   align-items: center;
@@ -153,7 +173,7 @@ function performSearch() {
   font-size: 0.9rem;
 }
 
-/* Hamburger */
+/* 🍔 Hamburger */
 .hamburger {
   display: none;
   background: none;
@@ -162,7 +182,7 @@ function performSearch() {
   cursor: pointer;
 }
 
-/* Drawer */
+/* 📱 Drawer Navigation (Mobile) */
 .drawer {
   position: fixed;
   top: 0;
@@ -186,7 +206,7 @@ function performSearch() {
   text-decoration: none;
 }
 .drawer-nav a:hover,
-.drawer-nav a.active {
+.drawer-nav .active {
   color: var(--color-accent);
   text-decoration: underline;
 }
@@ -199,7 +219,7 @@ function performSearch() {
   cursor: pointer;
 }
 
-/* Overlay */
+/* 🔲 Overlay */
 .overlay {
   position: fixed;
   top: 0;
@@ -210,7 +230,7 @@ function performSearch() {
   z-index: 1090;
 }
 
-/* Visibility */
+/* 🖥️ Visibility Classes */
 .mobile-only {
   display: none;
 }
@@ -218,7 +238,7 @@ function performSearch() {
   display: flex;
 }
 
-/* Responsive */
+/* 📱 Responsive Behavior */
 @media (max-width: 768px) {
   .mobile-only {
     display: block;
@@ -228,7 +248,7 @@ function performSearch() {
   }
 }
 
-/* Transition */
+/* 🎬 Transition Animation */
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 0.3s ease;

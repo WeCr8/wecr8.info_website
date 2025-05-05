@@ -16,10 +16,10 @@
   --section-gap: 4rem;
 }
 
-/* Enforce consistent branding: always light theme */
+/* ✅ Enforce consistent light theme – Correct syntax */
 html {
-  color-scheme: only light;
-  background: var(--color-background);
+  color-scheme: light;
+  background-color: var(--color-background);
   color: var(--color-text);
 }
 
@@ -50,6 +50,8 @@ body {
     sans-serif;
   font-size: 16px;
   line-height: 1.6;
+  background-color: var(--color-background);
+  color: var(--color-text);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,12 +94,14 @@ p {
 .section {
   padding: var(--section-gap) 1rem;
 }
+
 .section-blue {
-  background: #70a1d7;
+  background-color: #70a1d7;
   color: white;
 }
+
 .section-light {
-  background: var(--color-light);
+  background-color: var(--color-light);
 }
 
 /* ------------------ LINKS ------------------ */
@@ -195,9 +199,11 @@ select:focus {
 .text-heading {
   color: var(--color-heading);
 }
+
 .drop-shadow {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 .mb-0 {
   margin-bottom: 0;
 }
