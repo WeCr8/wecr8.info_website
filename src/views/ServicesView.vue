@@ -1,85 +1,111 @@
+<script setup>
+import { RouterLink } from 'vue-router'
+import CardGrid from '@/components/CardGrid.vue'
+
+const serviceCards = [
+  {
+    title: 'Smart Tooling & Zoller Integration',
+    description: 'Digital tool libraries, Zoller setup, and CAM alignment.',
+    link: '/services/tool-library',
+    cta: 'Explore Tooling',
+  },
+  {
+    title: 'Automation & CNC Optimization',
+    description: 'Workflow automation and CNC machine efficiency tuning.',
+    link: '/services/cnc-automation',
+    cta: 'See Automation',
+  },
+  {
+    title: 'Training & Workforce Development',
+    description: 'Educating machinists and programmers with modern skills.',
+    link: '/services/training',
+    cta: 'View Training',
+  },
+]
+</script>
+
 <template>
-  <div class="section-light section text-center">
-    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-heading">Our Services</h1>
-    <p class="text-muted max-w-2xl mx-auto mb-8">
-      WeCr8 Solutions delivers strategic innovations in automation, smart tooling, and workforce
-      training for advanced manufacturing.
-    </p>
-
-    <div class="cards container">
-      <div class="card">
-        <h3>Smart Tooling Systems</h3>
-        <p>Standardize tool libraries, digitize with Zoller, and align CAM/CNC toolchains.</p>
-        <RouterLink class="cta-link" to="/services/tool-library">Explore Tooling</RouterLink>
+  <div class="services">
+    <!-- 🔷 Spotlight Section -->
+    <section class="spotlight" role="region" aria-label="WeCr8 Spotlight Services Intro">
+      <div class="container">
+        <h1 class="spotlight-title">Built for Modern Manufacturing</h1>
+        <p class="spotlight-subtext">
+          Our services drive real-world results across aerospace, energy, and advanced
+          machining—empowering teams through smarter tooling, connected automation, and targeted
+          education.
+        </p>
+        <RouterLink
+          to="/contact"
+          class="cta"
+          aria-label="Request a consultation with WeCr8 Solutions"
+          data-cookieconsent="ignore"
+        >
+          Request a Free Consultation
+        </RouterLink>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Automation Integration</h3>
-        <p>Maximize ROI by streamlining processes with proven automation systems.</p>
-        <RouterLink class="cta-link" to="/services/cnc-automation">See Automation</RouterLink>
-      </div>
-
-      <div class="card">
-        <h3>Workforce Education</h3>
-        <p>Upskill your team with custom training programs in modern manufacturing practices.</p>
-        <RouterLink class="cta-link" to="/services/training">View Training</RouterLink>
-      </div>
-    </div>
+    <!-- 🛠️ Services Grid -->
+    <CardGrid :cards="serviceCards" />
   </div>
 </template>
 
-<script setup>
-import { RouterLink } from 'vue-router'
-</script>
-
 <style scoped>
-.cards {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.services {
+  width: 100%;
 }
 
-.card {
-  background: var(--color-light);
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* 🔷 Blue Intro Section */
+.spotlight {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 5rem 1rem 6rem;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.card h3 {
-  margin-bottom: 0.5rem;
-  color: var(--color-heading);
-}
-.card p {
+.spotlight-title {
+  font-size: 2.5rem;
+  font-weight: 800;
   margin-bottom: 1rem;
-  color: var(--color-text);
+  color: #fff;
 }
 
-.cta-link {
+.spotlight-subtext {
+  font-size: 1.125rem;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  color: #f0f0f0;
+  opacity: 0.95;
+}
+
+.cta {
   background: var(--color-accent);
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
   font-weight: 600;
-  font-size: 0.9rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  display: inline-block;
+  transition: background-color 0.3s ease;
   text-decoration: none;
-  transition: background 0.3s ease;
-}
-.cta-link:hover {
-  background: #d9481f;
 }
 
-/* Responsive layout */
+.cta:hover,
+.cta:focus {
+  background-color: #d9481f;
+  outline: none;
+}
+
+/* Responsive Tweaks */
 @media (min-width: 768px) {
-  .cards {
-    flex-direction: row;
-    justify-content: center;
+  .spotlight-title {
+    font-size: 3rem;
   }
-  .card {
-    width: 280px;
+
+  .spotlight-subtext {
+    font-size: 1.25rem;
   }
 }
 </style>
