@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import CardGrid from '@/components/CardGrid.vue'
+import BaseSection from '@/components/BaseSection.vue'
 
 const serviceCards = [
   {
@@ -26,59 +27,33 @@ const serviceCards = [
 
 <template>
   <div class="services">
-
     <!-- 🔷 Spotlight Section -->
-    <section class="spotlight" role="region" aria-label="WeCr8 Spotlight Services Intro">
-      <div class="container">
-        <h1 class="spotlight-title">Built for Modern Manufacturing</h1>
-        <p class="spotlight-subtext">
-          Our services drive real-world results across aerospace, energy, and advanced machining—empowering teams through smarter tooling, connected automation, and targeted education.
-        </p>
-        <RouterLink
-          to="/contact"
-          class="cta"
-          aria-label="Request a consultation with WeCr8 Solutions"
-          data-cookieconsent="ignore"
-        >
-          Request a Free Consultation
-        </RouterLink>
-      </div>
-    </section>
+    <BaseSection variant="blue" align="center" padding="xl">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow">
+        Built for Modern Manufacturing
+      </h1>
+      <p class="text-lg text-white/90 max-w-2xl mx-auto mb-6">
+        Our services drive real-world results across aerospace, energy, and advanced
+        machining—empowering teams through smarter tooling, connected automation, and targeted
+        education.
+      </p>
+      <RouterLink
+        to="/contact"
+        class="cta"
+        aria-label="Request a consultation with WeCr8 Solutions"
+      >
+        Request a Free Consultation
+      </RouterLink>
+    </BaseSection>
 
     <!-- 🛠️ Services Grid -->
-    <CardGrid :cards="serviceCards" />
+    <BaseSection variant="white">
+      <CardGrid :cards="serviceCards" />
+    </BaseSection>
   </div>
 </template>
 
 <style scoped>
-.services {
-  width: 100%;
-}
-
-/* 🔷 Blue Intro Section */
-.spotlight {
-  background-color: var(--color-primary);
-  color: white;
-  padding: 5rem 1rem 6rem;
-  text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.spotlight-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.spotlight-subtext {
-  font-size: 1.125rem;
-  max-width: 700px;
-  margin: 0 auto 1.5rem;
-  color: #f0f0f0;
-  opacity: 0.95;
-}
-
 .cta {
   background: var(--color-accent);
   color: white;
@@ -90,21 +65,9 @@ const serviceCards = [
   transition: background-color 0.3s ease;
   text-decoration: none;
 }
-
 .cta:hover,
 .cta:focus {
   background-color: #d9481f;
   outline: none;
-}
-
-/* Responsive Tweaks */
-@media (min-width: 768px) {
-  .spotlight-title {
-    font-size: 3rem;
-  }
-
-  .spotlight-subtext {
-    font-size: 1.25rem;
-  }
 }
 </style>

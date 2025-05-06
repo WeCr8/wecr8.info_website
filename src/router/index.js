@@ -31,111 +31,84 @@ const routes = [
     component: () => import('../views/ContactView.vue'),
     meta: {
       title: 'Contact WeCr8 Solutions',
-      requiresConsent: true, // 👈 Optional: restrict if no Cookiebot consent
+      ogTitle: 'Get in Touch – WeCr8 Solutions',
+      ogDescription: 'Have a question or project? Let’s talk shop.',
     },
   },
   {
     path: '/search',
     name: 'Search',
     component: () => import('../views/SearchView.vue'),
-    meta: {
-      title: 'Search Results – WeCr8 Solutions',
-    },
+    meta: { title: 'Search Results – WeCr8 Solutions' },
   },
   {
     path: '/services',
     name: 'Services',
     component: () => import('../views/ServicesView.vue'),
-    meta: {
-      title: 'Our Services – WeCr8 Solutions',
-    },
+    meta: { title: 'Our Services – WeCr8 Solutions' },
   },
   {
     path: '/services/tool-library',
     name: 'ToolLibrary',
     component: () => import('../views/ToolLibraryView.vue'),
-    meta: {
-      title: 'Tool Library Systems – WeCr8 Solutions',
-    },
+    meta: { title: 'Tool Library Systems – WeCr8 Solutions' },
   },
   {
     path: '/services/cnc-automation',
     name: 'CNCAutomation',
     component: () => import('../views/CNCAutomationView.vue'),
-    meta: {
-      title: 'CNC Automation – WeCr8 Solutions',
-    },
+    meta: { title: 'CNC Automation – WeCr8 Solutions' },
   },
   {
     path: '/services/training',
     name: 'Training',
     component: () => import('../views/TrainingView.vue'),
-    meta: {
-      title: 'Training & Workforce Development – WeCr8 Solutions',
-    },
+    meta: { title: 'Training & Workforce Development – WeCr8 Solutions' },
   },
   {
     path: '/services/process-optimization',
     name: 'ProcessOptimization',
     component: () => import('../views/ProcessOptimizationView.vue'),
-    meta: {
-      title: 'Process Optimization – WeCr8 Solutions',
-    },
+    meta: { title: 'Process Optimization – WeCr8 Solutions' },
   },
   {
     path: '/services/lean-manufacturing',
     name: 'LeanManufacturing',
     component: () => import('../views/LeanManufacturingView.vue'),
-    meta: {
-      title: 'Lean Manufacturing – WeCr8 Solutions',
-    },
+    meta: { title: 'Lean Manufacturing – WeCr8 Solutions' },
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('../views/NotFound.vue'),
-    meta: {
-      title: 'Page Not Found – WeCr8 Solutions',
-    },
+    meta: { title: 'Page Not Found – WeCr8 Solutions' },
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-  scrollBehavior() {
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition
+    if (to.hash) return { el: to.hash, behavior: 'smooth' }
     return { top: 0 }
   },
 })
 
-// 🧠 Post-Navigation Meta Tag Handling + Cookiebot Event
+// 🧠 Post-Navigation Meta Updates
 router.afterEach((to) => {
-  const title = to.meta?.title || 'WeCr8 Solutions'
-  document.title = title
+  const defaultTitle = 'WeCr8 Solutions'
+  const defaultDesc = 'Smart Tooling, Automation, and Training Experts.'
 
-  updateMetaTag('description', to.meta?.description || 'Smart Tooling and Automation Experts')
-  updateMetaProperty('og:title', to.meta?.ogTitle || title)
-  updateMetaProperty('og:description', to.meta?.ogDescription || '')
+  document.title = to.meta?.title || defaultTitle
+
+  updateMetaTag('description', to.meta?.description || defaultDesc)
+  updateMetaProperty('og:title', to.meta?.ogTitle || document.title)
+  updateMetaProperty('og:description', to.meta?.ogDescription || defaultDesc)
   updateMetaProperty('og:url', window.location.href)
-
-  // 🔁 Cookiebot stats event (if allowed)
-  if (window?.Cookiebot?.consent?.statistics) {
-    if (typeof window.uc_event === 'function') {
-      window.uc_event('page_view', { page: to.fullPath })
-    }
-  }
 })
 
-// 🔐 Route Guard for Consent-Sensitive Routes
-router.beforeEach((to, from, next) => {
-  if (to.meta.requiresConsent && !window?.Cookiebot?.consent?.statistics) {
-    alert('You need to accept analytics cookies to use this feature.')
-    return next(false)
-  }
-  next()
-})
-
-// 🔧 Meta Tag Helpers
+// 🔧 Meta Utilities
 function updateMetaTag(name, content) {
   let tag = document.querySelector(`meta[name="${name}"]`)
   if (!tag) {
