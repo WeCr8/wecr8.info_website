@@ -1,5 +1,5 @@
 /* ==========================================================================
-   WeCr8 Solutions – Global Styles (Modular, Uniform, Optimized)
+   WeCr8 Solutions – Global Styles (Tailwind-Friendly + Modular)
    ========================================================================== */
 
 /* ------------------ THEME VARIABLES ------------------ */
@@ -17,13 +17,7 @@
   --max-width: 1280px;
 }
 
-/* ------------------ BASE STYLES ------------------ */
-html {
-  color-scheme: light;
-  background-color: var(--color-background);
-  color: var(--color-text);
-  scroll-behavior: smooth;
-}
+/* ------------------ BASE RESET ------------------ */
 *,
 *::before,
 *::after {
@@ -31,24 +25,39 @@ html {
   margin: 0;
   padding: 0;
 }
-html, body {
+html,
+body {
   min-height: 100vh;
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.6;
+  background-color: var(--color-background);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 
 /* ------------------ TYPOGRAPHY ------------------ */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-weight: 700;
   color: var(--color-heading);
   margin-bottom: 1rem;
 }
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
 p {
   font-size: 1rem;
   margin-bottom: 1rem;
@@ -56,12 +65,18 @@ p {
 
 /* ------------------ LAYOUT ------------------ */
 .container {
+  width: 100%;
   max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .section {
-  padding: var(--section-gap) 1rem;
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .section-light {
   background-color: var(--color-light);
@@ -75,14 +90,14 @@ p {
   color: var(--color-text);
 }
 
-/* ------------------ REUSABLE HERO SECTION ------------------ */
+/* ------------------ HERO SECTION ------------------ */
 .section-blue {
   position: relative;
   background-color: var(--color-primary);
-  padding: 5rem 1rem 6rem;
   color: white;
   text-align: center;
   overflow: hidden;
+  padding: 5rem 1rem 6rem;
 }
 .section-blue::before {
   content: '';
@@ -98,8 +113,8 @@ p {
 .section-blue h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  color: white;
   margin-bottom: 1rem;
+  color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 .section-blue p {
@@ -111,14 +126,8 @@ p {
   line-height: 1.6;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 960px;
-  margin: 0 auto;
-}
 
-/* ------------------ HERO BG IMAGE VARIANT ------------------ */
+/* Hero Image Variant */
 .hero {
   position: relative;
   background: url('/hero-bg.jpg') center/cover no-repeat;
@@ -138,19 +147,9 @@ p {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* ------------------ LINKS ------------------ */
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-a:hover {
-  color: var(--color-accent);
-  text-decoration: underline;
-}
-
 /* ------------------ BUTTONS ------------------ */
-button, .cta {
+button,
+.cta {
   background: var(--color-accent);
   color: white;
   font-weight: 600;
@@ -162,12 +161,15 @@ button, .cta {
   cursor: pointer;
   display: inline-block;
 }
-button:hover, .cta:hover {
+button:hover,
+.cta:hover {
   background-color: #d9481f;
 }
 
 /* ------------------ FORMS ------------------ */
-input, textarea, select {
+input,
+textarea,
+select {
   font-family: inherit;
   font-size: 1rem;
   padding: 0.5rem 1rem;
@@ -175,9 +177,22 @@ input, textarea, select {
   border-radius: 5px;
   width: 100%;
 }
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   border-color: var(--color-accent);
   outline: none;
+}
+
+/* ------------------ LINKS ------------------ */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 /* ------------------ CARDS ------------------ */
@@ -199,7 +214,9 @@ input:focus, textarea:focus, select:focus {
 }
 .card-link {
   display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 .card-link:hover {
   transform: translateY(-5px);
@@ -215,26 +232,54 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* ------------------ UTILITIES ------------------ */
-.text-center { text-align: center; }
-.text-muted { color: var(--color-muted); }
-.text-heading { color: var(--color-heading); }
-.drop-shadow { text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); }
+.text-center {
+  text-align: center;
+}
+.text-muted {
+  color: var(--color-muted);
+}
+.text-heading {
+  color: var(--color-heading);
+}
+.drop-shadow {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+.mb-5 {
+  margin-bottom: 2rem;
+}
+.mt-4 {
+  margin-top: 1.5rem;
+}
 
-.mb-0 { margin-bottom: 0; }
-.mb-1 { margin-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 1rem; }
-.mb-4 { margin-bottom: 1.5rem; }
-.mb-5 { margin-bottom: 2rem; }
-.mt-4 { margin-top: 1.5rem; }
-
-/* ------------------ RESPONSIVENESS ------------------ */
+/* ------------------ RESPONSIVE OVERRIDES ------------------ */
 @media (min-width: 768px) {
-  .container { padding: 2rem; }
-  h1 { font-size: 3rem; }
-  h2 { font-size: 2.25rem; }
-  h3 { font-size: 1.75rem; }
-
+  .container {
+    padding: 2rem;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2.25rem;
+  }
+  h3 {
+    font-size: 1.75rem;
+  }
   .grid-cards {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -250,7 +295,8 @@ input:focus, textarea:focus, select:focus {
 }
 @media (min-width: 1280px) {
   .section {
-    padding: var(--section-gap) 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
   .section-blue {
     padding: 8rem 2rem 10rem;
@@ -258,7 +304,8 @@ input:focus, textarea:focus, select:focus {
 }
 @media (min-width: 1440px) {
   .section {
-    padding: var(--section-gap) 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
   .section-blue {
     padding: 10rem 3rem 12rem;
@@ -266,7 +313,8 @@ input:focus, textarea:focus, select:focus {
 }
 @media (min-width: 1600px) {
   .section {
-    padding: var(--section-gap) 4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
   .section-blue {
     padding: 12rem 4rem 14rem;
@@ -274,12 +322,14 @@ input:focus, textarea:focus, select:focus {
 }
 @media (min-width: 1920px) {
   .section {
-    padding: var(--section-gap) 5rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
   .section-blue {
     padding: 14rem 5rem 16rem;
   }
 }
+
 /* ------------------ FOOTER ------------------ */
 footer {
   background: var(--color-primary);
@@ -290,4 +340,52 @@ footer {
 footer a {
   color: white;
   text-decoration: underline;
-} 
+}
+footer a:hover {
+  color: var(--color-accent);
+}
+footer p {
+  margin-bottom: 0.5rem;
+}
+footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+footer .social-icons a {
+  color: white;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+footer .social-icons a:hover {
+  color: var(--color-accent);
+}
+footer .social-icons svg {
+  width: 24px;
+  height: 24px;
+}
+footer .social-icons svg path {
+  fill: currentColor;
+}
+footer .social-icons svg:hover path {
+  fill: var(--color-accent);
+}
+footer .social-icons svg:active path {
+  fill: var(--color-accent);
+}
+footer .social-icons svg:focus path {
+  fill: var(--color-accent);
+}
+footer .social-icons svg:focus-visible path {
+  fill: var(--color-accent);
+}
+footer .social-icons svg:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+footer .social-icons svg:focus-visible:active {
+  outline: none;
+}
+footer .social-icons svg:focus-visible:hover {
+  outline: none;
+}
