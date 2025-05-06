@@ -1,102 +1,58 @@
+<script setup>
+import { RouterLink } from 'vue-router'
+import HeroSection from '@/components/HeroSection.vue'
+import BaseSection from '@/components/BaseSection.vue'
+</script>
+
 <template>
   <div class="cnc-automation">
-    <!-- 🔵 Hero Section -->
-    <section class="section-blue" role="region" aria-label="Automation Hero">
-      <div class="overlay"></div>
-      <div class="container relative z-10 text-center">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
-          Automation & CNC Optimization
-        </h1>
-        <p class="text-lg text-white/90 max-w-3xl mx-auto">
-          We streamline operations with automation tailored for precision machining, improving uptime, reducing human error, and delivering measurable ROI.
-        </p>
-      </div>
-    </section>
+    <!-- 🔵 Hero Section using HeroSection Component -->
+    <HeroSection>
+      <template #title>Automation & CNC Optimization</template>
+      <template #subtext>
+        We streamline operations with automation tailored for precision machining, improving uptime,
+        reducing human error, and delivering measurable ROI.
+      </template>
+      <RouterLink to="/contact" class="cta mt-4 inline-block">
+        Start Automating Your Shop
+      </RouterLink>
+    </HeroSection>
 
-    <!-- ⚙️ Content Section -->
-    <section class="section container text-center" role="region" aria-label="Automation Service Details">
-      <div class="content-box">
-        <ul class="feature-list text-left">
-          <li>Machine tending automation & integration</li>
-          <li>G-code optimization and toolpath efficiency audits</li>
-          <li>DNC file transfer systems and remote job delivery</li>
-          <li>Setup reduction strategies using SMED principles</li>
-          <li>Custom PLC routines for peripheral automation</li>
+    <!-- ⚙️ Service Details Section -->
+    <BaseSection variant="white" align="center">
+      <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow">
+        <ul class="space-y-4 text-left text-base text-text">
+          <li class="relative pl-6 before:absolute before:left-0 before:content-['✔'] before:text-accent before:font-bold">
+            Machine tending automation & integration
+          </li>
+          <li class="relative pl-6 before:absolute before:left-0 before:content-['✔'] before:text-accent before:font-bold">
+            G-code optimization and toolpath efficiency audits
+          </li>
+          <li class="relative pl-6 before:absolute before:left-0 before:content-['✔'] before:text-accent before:font-bold">
+            DNC file transfer systems and remote job delivery
+          </li>
+          <li class="relative pl-6 before:absolute before:left-0 before:content-['✔'] before:text-accent before:font-bold">
+            Setup reduction strategies using SMED principles
+          </li>
+          <li class="relative pl-6 before:absolute before:left-0 before:content-['✔'] before:text-accent before:font-bold">
+            Custom PLC routines for peripheral automation
+          </li>
         </ul>
 
-        <RouterLink class="cta" to="/contact" aria-label="Start Automation Consultation">
-          Start Automating Your Shop
+        <RouterLink
+          to="/contact"
+          class="cta mt-6 inline-block"
+          aria-label="Schedule your automation consultation"
+        >
+          Schedule a Consultation
         </RouterLink>
       </div>
-    </section>
+    </BaseSection>
   </div>
 </template>
 
-<script setup>
-import { RouterLink } from 'vue-router'
-</script>
-
 <style scoped>
-.section-blue {
-  position: relative;
-  background-color: var(--color-primary);
-  padding: 5rem 1rem;
-  color: white;
-  overflow: hidden;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-  z-index: 0;
-}
-
-.section-blue h1,
-.section-blue p {
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.section {
-  padding: 4rem 1rem;
-}
-
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-.content-box {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.feature-list {
-  list-style: none;
-  padding-left: 0;
-  margin-bottom: 2rem;
-}
-
-.feature-list li {
-  position: relative;
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  color: var(--color-text);
-}
-
-.feature-list li::before {
-  content: "✔";
-  position: absolute;
-  left: 0;
-  color: var(--color-accent);
-  font-weight: bold;
-}
-
 .cta {
-  display: inline-block;
   background: var(--color-accent);
   color: white;
   font-weight: 600;
@@ -106,7 +62,6 @@ import { RouterLink } from 'vue-router'
   transition: background-color 0.3s ease;
   text-decoration: none;
 }
-
 .cta:hover {
   background-color: #d9481f;
 }

@@ -27,28 +27,31 @@ const serviceCards = [
 
 <template>
   <div class="services">
-    <!-- 🔷 Spotlight Section -->
+    <!-- 🔷 Hero Spotlight -->
     <BaseSection variant="blue" align="center" padding="xl">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow">
-        Built for Modern Manufacturing
-      </h1>
-      <p class="text-lg text-white/90 max-w-2xl mx-auto mb-6">
-        Our services drive real-world results across aerospace, energy, and advanced
-        machining—empowering teams through smarter tooling, connected automation, and targeted
-        education.
-      </p>
-      <RouterLink
-        to="/contact"
-        class="cta"
-        aria-label="Request a consultation with WeCr8 Solutions"
-      >
-        Request a Free Consultation
-      </RouterLink>
+      <template #default>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow">
+          Built for Modern Manufacturing
+        </h1>
+        <p class="text-lg text-white/90 max-w-2xl mx-auto mb-6">
+          Our services drive real-world results across aerospace, energy, and advanced machining—
+          empowering teams through smarter tooling, connected automation, and targeted education.
+        </p>
+        <RouterLink
+          to="/contact"
+          class="cta inline-block mt-2"
+          aria-label="Request a consultation with WeCr8 Solutions"
+        >
+          Request a Free Consultation
+        </RouterLink>
+      </template>
     </BaseSection>
 
-    <!-- 🛠️ Services Grid -->
+    <!-- 🛠️ Service Cards -->
     <BaseSection variant="white">
-      <CardGrid :cards="serviceCards" />
+      <template #default>
+        <CardGrid :cards="serviceCards" />
+      </template>
     </BaseSection>
   </div>
 </template>
