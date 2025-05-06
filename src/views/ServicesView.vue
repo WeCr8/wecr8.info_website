@@ -26,14 +26,13 @@ const serviceCards = [
 
 <template>
   <div class="services">
+
     <!-- 🔷 Spotlight Section -->
     <section class="spotlight" role="region" aria-label="WeCr8 Spotlight Services Intro">
       <div class="container">
         <h1 class="spotlight-title">Built for Modern Manufacturing</h1>
         <p class="spotlight-subtext">
-          Our services drive real-world results across aerospace, energy, and advanced
-          machining—empowering teams through smarter tooling, connected automation, and targeted
-          education.
+          Our services drive real-world results across aerospace, energy, and advanced machining—empowering teams through smarter tooling, connected automation, and targeted education.
         </p>
         <RouterLink
           to="/contact"

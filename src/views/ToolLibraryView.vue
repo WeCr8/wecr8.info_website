@@ -1,103 +1,102 @@
 <template>
-  <section class="service-page">
-    <div class="container">
-      <!-- Page Title -->
-      <h1 class="title">Smart Tooling & Zoller Integration</h1>
+  <div class="tool-library">
+    <!-- 🔷 Hero Section -->
+    <section class="section-blue" role="region" aria-label="Smart Tooling Hero">
+      <div class="overlay"></div>
+      <div class="container relative z-10 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+          Smart Tooling & Zoller Integration
+        </h1>
+        <p class="text-lg text-white/90 max-w-3xl mx-auto">
+          Bring structure to chaos with standardized tool libraries and seamless Zoller integration
+          — ensuring every tool is measured, documented, and ready for production.
+        </p>
+      </div>
+    </section>
 
-      <!-- Introductory Statement -->
-      <p class="intro">
-        At WeCr8 Solutions, we bring structure to chaos. Our tooling solutions combine digital tool
-        libraries with Zoller presetting systems to help you standardize, organize, and scale with
-        precision.
-      </p>
-
-      <!-- Features List -->
-      <div class="content">
-        <ul class="feature-list">
-          <li>✔ Centralized, structured tool databases</li>
-          <li>✔ Seamless integration with Zoller presetters</li>
-          <li>✔ CAM compatibility: Mastercam, Fusion, Siemens NX</li>
-          <li>✔ Full tooling metadata: Tool ID, Holder, Projection, Description</li>
-          <li>✔ Tool card automation and system export</li>
+    <!-- 📦 Features Section -->
+    <section class="section container text-center" role="region" aria-label="Tool Library Features">
+      <div class="content-box">
+        <ul class="feature-list text-left">
+          <li>Centralized, structured tool databases</li>
+          <li>Seamless integration with Zoller presetters</li>
+          <li>CAM compatibility: Mastercam, Fusion, Siemens NX</li>
+          <li>Complete metadata: Tool ID, Holder, Projection, Description</li>
+          <li>Automated tool card generation and system exports</li>
         </ul>
 
-        <!-- Call to Action -->
-        <RouterLink class="cta" to="/contact"> Get Started with Smart Tooling </RouterLink>
+        <RouterLink class="cta" to="/contact" aria-label="Start Tool Library Consultation">
+          Get Started with Smart Tooling
+        </RouterLink>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script setup>
-// Vue Router Link used for navigation
 import { RouterLink } from 'vue-router'
 </script>
 
 <style scoped>
-@import '../assets/main.css';
-
-/* Scoped Enhancements for This View */
-.service-page {
-  padding: 4rem 1rem;
-  background-color: var(--color-light);
-  color: var(--color-text);
+.section-blue {
+  position: relative;
+  background-color: var(--color-primary);
+  padding: 5rem 1rem;
+  color: white;
+  overflow: hidden;
 }
-
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 0;
+}
+.section-blue h1,
+.section-blue p {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.section {
+  padding: 4rem 1rem;
+}
 .container {
   max-width: 960px;
   margin: 0 auto;
-  text-align: center;
 }
-
-.title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--color-heading);
-  margin-bottom: 1.5rem;
-}
-
-.intro {
-  font-size: 1.125rem;
-  color: var(--color-muted);
-  margin-bottom: 2rem;
-}
-
-.content {
-  text-align: left;
-  padding: 1rem;
+.content-box {
   background: white;
-  border-radius: 8px;
+  padding: 2rem;
+  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-
 .feature-list {
-  padding-left: 1.5rem;
-  margin-bottom: 2rem;
   list-style: none;
+  padding-left: 0;
+  margin-bottom: 2rem;
 }
 .feature-list li {
-  margin-bottom: 0.75rem;
-  font-size: 1rem;
   position: relative;
-  padding-left: 1.25rem;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: var(--color-text);
 }
 .feature-list li::before {
-  content: '✔';
+  content: "✔";
   position: absolute;
   left: 0;
   color: var(--color-accent);
   font-weight: bold;
 }
-
 .cta {
   display: inline-block;
-  background-color: var(--color-accent);
+  background: var(--color-accent);
   color: white;
+  font-weight: 600;
   padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  font-weight: bold;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
   text-decoration: none;
-  transition: background-color 0.3s;
 }
 .cta:hover {
   background-color: #d9481f;

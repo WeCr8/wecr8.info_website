@@ -1,22 +1,48 @@
+<script setup>
+import { RouterLink } from 'vue-router'
+import CardGrid from '@/components/CardGrid.vue'
+
+const coreFocus = [
+  {
+    title: 'Smart Tooling & Zoller Integration',
+    description: 'Digital tool libraries, Zoller setup, and CAM alignment.',
+    link: '/services/tool-library',
+    cta: 'Explore Tooling',
+  },
+  {
+    title: 'Automation & CNC Optimization',
+    description: 'Workflow automation and CNC machine efficiency tuning.',
+    link: '/services/cnc-automation',
+    cta: 'See Automation',
+  },
+  {
+    title: 'Training & Workforce Development',
+    description: 'Educating machinists and programmers with modern skills.',
+    link: '/services/training',
+    cta: 'View Training',
+  },
+]
+</script>
+
 <template>
   <div class="about">
+
     <!-- 🔵 Hero Section -->
-    <section class="section-blue" role="region" aria-label="About WeCr8 Solutions">
-      <div class="overlay"></div>
-      <div class="container relative z-10 text-center">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6">
-          About WeCr8 Solutions
-        </h1>
-        <p class="text-lg text-white/90 max-w-3xl mx-auto">
+    <section class="spotlight" role="region" aria-label="About WeCr8 Solutions">
+      <div class="container">
+        <h1 class="spotlight-title">About WeCr8 Solutions</h1>
+        <p class="spotlight-subtext">
           WeCr8 Solutions is a forward-thinking consulting group specializing in smart tooling systems, automation strategies, and digital transformation for modern manufacturers. From shop floor to digital thread, we build precision-driven workflows that scale.
         </p>
+        <RouterLink to="/contact" class="cta" aria-label="Get in Touch">
+          Get in Touch
+        </RouterLink>
       </div>
     </section>
 
-    <!-- 🔧 Core Capabilities Grid -->
-    <section class="section container text-center" role="region" aria-label="Core Capabilities">
-      <h2 class="text-3xl font-bold text-heading mb-8">What Sets Us Apart</h2>
-
+    <!-- 🛠 Core Capabilities -->
+    <section class="section container text-center" role="region" aria-label="What We Do">
+      <h2 class="section-heading">What Sets Us Apart</h2>
       <div class="grid md:grid-cols-3 gap-10 text-left">
         <div class="value-box">
           <h3 class="text-xl font-semibold text-heading mb-2">🛠 Smart Tooling Systems</h3>
@@ -39,7 +65,7 @@
       </div>
     </section>
 
-    <!-- 🧭 Mission Statement -->
+    <!-- 💡 Mission Section -->
     <section class="section-light py-16 text-center" role="region" aria-label="Mission Statement">
       <div class="container max-w-4xl mx-auto">
         <h2 class="text-2xl font-bold text-heading mb-4">Our Mission</h2>
@@ -48,39 +74,69 @@
         </p>
       </div>
     </section>
+
+    <!-- 🔗 Crosslink to Services -->
+    <CardGrid :cards="coreFocus" />
   </div>
 </template>
 
 <style scoped>
-.section-blue {
-  position: relative;
+@import '../assets/main.css';
+
+.spotlight {
   background-color: var(--color-primary);
-  padding: 5rem 1rem;
   color: white;
-  overflow: hidden;
+  padding: 5rem 1rem 6rem;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.overlay {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-  z-index: 0;
+.spotlight-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #fff;
 }
 
-.section-blue h1,
-.section-blue p {
+.spotlight-subtext {
+  font-size: 1.125rem;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  color: #f0f0f0;
+  opacity: 0.95;
+}
+
+.section-heading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.cta {
+  background: var(--color-accent);
   color: white;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  display: inline-block;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
-
-.value-box p {
-  font-size: 0.95rem;
+.cta:hover,
+.cta:focus {
+  background-color: #d9481f;
+  outline: none;
 }
 
 @media (min-width: 768px) {
-  .section-blue h1 {
+  .spotlight-title {
     font-size: 3rem;
+  }
+
+  .spotlight-subtext {
+    font-size: 1.25rem;
   }
 }
 </style>
