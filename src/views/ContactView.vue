@@ -1,9 +1,57 @@
 <script setup>
 import BaseSection from '@/components/BaseSection.vue'
+import { ref } from 'vue'
+
+const name = ref('')
+const email = ref('')
+const interest = ref('')
+const message = ref('')
+const ndaAccepted = ref(false)
+const showNDA = ref(true)
+
+function agreeToNDA() {
+  ndaAccepted.value = true
+  showNDA.value = false
+}
+
+function handleSubmit() {
+  const ticketID = 'TKT-' + Math.floor(1000 + Math.random() * 9000)
+
+  const submission = {
+    name: name.value,
+    email: email.value,
+    interest: interest.value,
+    message: message.value,
+    ticketID,
+  }
+
+  console.log('Form submitted:', submission)
+
+  if (interest.value === 'Smart Tooling & Zoller') {
+    window.location.href = 'https://forms.gle/YOUR_TOOLING_FORM'
+  } else if (interest.value === 'Training Programs') {
+    window.location.href = 'https://forms.gle/YOUR_TRAINING_FORM'
+  } else if (interest.value === 'General Inquiry') {
+    window.location.href = '/thanks'
+  } else {
+    window.location.href = 'https://calendly.com/wecr8/discovery-call'
+  }
+}
 </script>
 
 <template>
   <div class="contact-page">
+    <!-- 🔷 NDA Modal -->
+    <div v-if="showNDA" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+      <div class="bg-white p-6 rounded-xl max-w-lg shadow-xl">
+        <h2 class="text-xl font-bold mb-2">Non-Disclosure Agreement</h2>
+        <p class="text-sm text-gray-700 mb-4 max-h-60 overflow-y-auto">
+          By continuing, you agree not to share, distribute, or reuse any documentation, strategy, or tooling information provided by WeCr8 Solutions. All shared content is considered confidential.
+        </p>
+        <button @click="agreeToNDA" class="cta w-full">I Agree</button>
+      </div>
+    </div>
+
     <!-- 🔷 Hero Section -->
     <BaseSection variant="blue" align="center" padding="xl">
       <template #default>
@@ -24,14 +72,12 @@ import BaseSection from '@/components/BaseSection.vue'
           <h2 class="text-2xl font-bold text-heading mb-4">Send Us a Message</h2>
           <p class="text-muted mb-6 text-sm">We typically respond within 24–48 hours.</p>
 
-          <!-- ✅ Netlify Form -->
-          <form name="ContactForm" method="POST" data-netlify="true" class="grid gap-4 text-left">
-            <input type="hidden" name="form-name" value="ContactForm" />
+          <!-- 🚀 Dynamic Routing Form -->
+          <form @submit.prevent="handleSubmit" class="grid gap-4 text-left" v-if="ndaAccepted">
+            <input v-model="name" type="text" name="name" placeholder="Your Name" required class="input" />
+            <input v-model="email" type="email" name="email" placeholder="Your Email" required class="input" />
 
-            <input type="text" name="name" placeholder="Your Name" required class="input" />
-            <input type="email" name="email" placeholder="Your Email" required class="input" />
-
-            <select name="interest" required class="input">
+            <select v-model="interest" name="interest" required class="input">
               <option value="" disabled selected>What are you interested in?</option>
               <option value="Smart Tooling & Zoller">Smart Tooling & Zoller Integration</option>
               <option value="CNC Automation">Automation & CNC Optimization</option>
@@ -40,6 +86,7 @@ import BaseSection from '@/components/BaseSection.vue'
             </select>
 
             <textarea
+              v-model="message"
               name="message"
               rows="5"
               placeholder="How can we help you?"
