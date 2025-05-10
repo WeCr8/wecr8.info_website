@@ -9,79 +9,97 @@ const message = ref('')
 const ndaAccepted = ref(false)
 const showNDA = ref(true)
 
+const redirectMap = {
+  'Smart Tooling & Zoller': 'https://forms.gle/Sn86xGx7j3VeTL7w5',
+  'CNC Automation': 'https://forms.gle/uEbaWufReC1fZ7jt5',
+  'Training Programs': 'https://forms.gle/Rm1Ltheqd9kn7bLR6',
+  'Webpage Projects': 'https://forms.gle/ByFgeoGuRnx4Aiyy7',
+  'General Inquiry': 'https://forms.gle/r67UXb1ncgTzUckbA',
+}
+
 function agreeToNDA() {
   ndaAccepted.value = true
   showNDA.value = false
 }
 
-function handleSubmit() {
-  const ticketID = 'TKT-' + Math.floor(1000 + Math.random() * 9000)
+function rejectNDA() {
+  window.location.href = 'https://www.wecr8.info'
+}
 
-  const submission = {
-    name: name.value,
-    email: email.value,
-    interest: interest.value,
-    message: message.value,
-    ticketID,
-  }
-
-  console.log('Form submitted:', submission)
-
-  if (interest.value === 'Smart Tooling & Zoller') {
-    window.location.href = 'https://forms.gle/YOUR_TOOLING_FORM'
-  } else if (interest.value === 'Training Programs') {
-    window.location.href = 'https://forms.gle/YOUR_TRAINING_FORM'
-  } else if (interest.value === 'General Inquiry') {
-    window.location.href = '/thanks'
+async function handleSubmit() {
+  const redirectTo = redirectMap[interest.value]
+  if (redirectTo) {
+    window.location.href = redirectTo
   } else {
-    window.location.href = 'https://calendly.com/wecr8/discovery-call'
+    alert('Please select a valid interest.')
   }
 }
 </script>
 
 <template>
   <div class="contact-page">
-    <!-- 🔷 NDA Modal -->
-    <div v-if="showNDA" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-      <div class="bg-white p-6 rounded-xl max-w-lg shadow-xl">
+    <!-- NDA Modal -->
+    <div
+      v-if="showNDA"
+      class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50"
+    >
+      <div class="bg-white p-6 rounded-xl max-w-md shadow-xl">
         <h2 class="text-xl font-bold mb-2">Non-Disclosure Agreement</h2>
         <p class="text-sm text-gray-700 mb-4 max-h-60 overflow-y-auto">
-          By continuing, you agree not to share, distribute, or reuse any documentation, strategy, or tooling information provided by WeCr8 Solutions. All shared content is considered confidential.
+          By continuing, you agree not to share, distribute, or reuse any documentation, strategy,
+          or tooling information provided by WeCr8 Solutions. All shared content is considered
+          confidential.
         </p>
-        <button @click="agreeToNDA" class="cta w-full">I Agree</button>
+        <div class="grid grid-cols-2 gap-4">
+          <button @click="agreeToNDA" class="cta w-full">I Agree</button>
+          <button @click="rejectNDA" class="cta bg-gray-300 text-black w-full">I Disagree</button>
+        </div>
       </div>
     </div>
 
-    <!-- 🔷 Hero Section -->
+    <!-- Hero Section -->
     <BaseSection variant="blue" align="center" padding="xl">
       <template #default>
         <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow">
           Let’s Connect
         </h1>
         <p class="text-lg text-white/90 max-w-2xl mx-auto">
-          Whether you’re curious about smart tooling, automation systems, or training programs —
-          we’re here to talk shop and build solutions together.
+          Choose an area of interest and get routed to the appropriate intake form.
         </p>
       </template>
     </BaseSection>
 
-    <!-- 📬 Contact Form Section -->
+    <!-- Contact Form -->
     <BaseSection variant="white" align="center">
       <template #default>
         <div class="contact-box bg-white px-6 py-10 md:p-12 shadow-lg rounded-xl max-w-2xl mx-auto">
           <h2 class="text-2xl font-bold text-heading mb-4">Send Us a Message</h2>
           <p class="text-muted mb-6 text-sm">We typically respond within 24–48 hours.</p>
 
-          <!-- 🚀 Dynamic Routing Form -->
           <form @submit.prevent="handleSubmit" class="grid gap-4 text-left" v-if="ndaAccepted">
-            <input v-model="name" type="text" name="name" placeholder="Your Name" required class="input" />
-            <input v-model="email" type="email" name="email" placeholder="Your Email" required class="input" />
+            <input
+              v-model="name"
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              class="input"
+            />
+            <input
+              v-model="email"
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              class="input"
+            />
 
             <select v-model="interest" name="interest" required class="input">
-              <option value="" disabled selected>What are you interested in?</option>
+              <option value="" disabled selected>Select a service you're interested in</option>
               <option value="Smart Tooling & Zoller">Smart Tooling & Zoller Integration</option>
               <option value="CNC Automation">Automation & CNC Optimization</option>
               <option value="Training Programs">Training & Workforce Development</option>
+              <option value="Webpage Projects">Webpage Design & Setup</option>
               <option value="General Inquiry">General Inquiry</option>
             </select>
 
@@ -94,22 +112,17 @@ function handleSubmit() {
               class="input resize-none"
             ></textarea>
 
-            <button type="submit" class="cta w-full mt-2">Send Message</button>
+            <button type="submit" class="cta w-full mt-2">Submit & Proceed</button>
           </form>
 
           <div class="mt-8 text-sm text-muted text-center">
             📧 Prefer email? Reach us at
-            <a
-              href="mailto:contact@wecr8.info"
-              class="text-accent hover:underline"
-              data-cookieconsent="ignore"
+            <a href="mailto:contact@wecr8.info" class="text-accent hover:underline"
+              >contact@wecr8.info</a
             >
-              contact@wecr8.info
-            </a>
           </div>
         </div>
 
-        <!-- 🔗 Social Link -->
         <div class="mt-12 text-sm text-muted">
           Prefer social? Connect on
           <a
