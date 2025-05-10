@@ -16,15 +16,15 @@ export default defineConfig(({ mode }) => {
       vueJsx(), // 🧩 Enable JSX/TSX support in Vue components
     ],
     resolve: {
-      alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
-        '@assets': path.resolve(__dirname, './src/assets'),
-        '@components': path.resolve(__dirname, './src/components'),
-        '@views': path.resolve(__dirname, './src/views'),
-        '@composables': path.resolve(__dirname, './src/composables'),
-        '@utils': path.resolve(__dirname, './src/utils'),
-      },
-    },
+  alias: {
+    '@': fileURLToPath(new URL('./src', import.meta.url)),
+    '@assets': path.resolve(__dirname, './src/assets'),
+    '@components': path.resolve(__dirname, './src/components'),
+    '@views': path.resolve(__dirname, './src/views'),
+    '@composables': path.resolve(__dirname, './src/composables'),
+    '@utils': path.resolve(__dirname, './src/composables/utils'), // ✅ FIXED
+  },
+},
     define: {
       __APP_ENV__: env.APP_ENV,
     },
