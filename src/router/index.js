@@ -98,10 +98,11 @@ const router = createRouter({
   },
 })
 
-// 🧠 Global Meta Management (title, description, OG, etc.)
+// 🧠 Global Meta Management + GA Tracking
 router.afterEach((to) => {
   const defaultTitle = 'WeCr8 Solutions'
   const defaultDesc = 'Smart Tooling, Automation, and Training Experts.'
+  const gaId = import.meta.env.VITE_GA_ID
 
   document.title = to.meta?.title || defaultTitle
   document.documentElement.setAttribute('lang', 'en')
@@ -120,7 +121,35 @@ router.afterEach((to) => {
   updateMetaProperty('twitter:card', 'summary_large_image')
   updateMetaProperty('twitter:title', to.meta?.ogTitle || document.title)
   updateMetaProperty('twitter:description', to.meta?.ogDescription || defaultDesc)
+
+  // ✅ Google Analytics SPA Tracking (Production Only)
+  if (import.meta.env.PROD && gaId) {
+    injectGoogleAnalytics(gaId)
+    if (window.gtag) {
+      window.gtag('config', gaId, { page_path: to.fullPath })
+    }
+  }
 })
+
+// Inject GA only once
+function injectGoogleAnalytics(id) {
+  if (document.getElementById('ga4-script')) return
+
+  const script = document.createElement('script')
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`
+  script.async = true
+  script.id = 'ga4-script'
+  document.head.appendChild(script)
+
+  const inline = document.createElement('script')
+  inline.innerHTML = `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${id}');
+  `
+  document.head.appendChild(inline)
+}
 
 function updateMetaTag(name, content) {
   let tag = document.querySelector(`meta[name="${name}"]`)
@@ -143,4 +172,4 @@ function updateMetaProperty(property, content) {
 }
 
 export default router
-export { routes, updateMetaTag, updateMetaProperty }
+

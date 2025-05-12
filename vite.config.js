@@ -4,10 +4,10 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'node:path'
+import { loadEnv } from 'vite'
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
+  const env = loadEnv(mode, process.cwd(), '')  // ✅ allows VITE_* to be loaded
 
   return {
     plugins: [
