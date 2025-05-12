@@ -34,8 +34,8 @@ const routes = [
     },
   },
   {
-    path: '/PrivacyPolicyView',
-    name: 'PrivacyPolicy',
+    path: '/privacypolicy',
+    name: 'Privacy Policy',
     component: () => import('@/views/PrivacyPolicyView.vue'),
     meta: {
       title: 'Privacy Policy – WeCr8 Solutions',
