@@ -8,28 +8,28 @@ import BaseSection from '@/components/BaseSection.vue'
   <div class="lean-manufacturing">
     <!-- 🟢 Hero Section -->
     <HeroSection>
-      <template #title>Lean Manufacturing Strategies</template>
+      <template #title>Lean Manufacturing | Do More With Less</template>
       <template #subtext>
-        Increase efficiency, reduce waste, and unlock the full potential of your operations with our tailored lean manufacturing solutions.
+        Eliminate inefficiency, reduce waste, and unlock capacity with actionable lean strategies tailored to your operations.
       </template>
       <RouterLink to="/contact" class="cta mt-4 inline-block">
-        Begin Your Lean Journey
+        Start a Lean Assessment
       </RouterLink>
     </HeroSection>
 
-    <!-- 📦 Lean Details -->
+    <!-- 📦 Lean Capabilities -->
     <BaseSection variant="white" align="center">
       <div class="max-w-3xl mx-auto bg-white rounded-lg shadow p-6 text-left">
         <ul class="feature-list">
-          <li>Value Stream Mapping (VSM) & flow analysis</li>
-          <li>Kaizen events & continuous improvement plans</li>
-          <li>5S workplace organization programs</li>
-          <li>Standard Work development & visual management</li>
-          <li>Inventory and production waste minimization</li>
+          <li>✔ Value Stream Mapping (VSM) & material flow design</li>
+          <li>✔ Rapid Kaizen events for frontline improvement</li>
+          <li>✔ 5S systems for workplace organization</li>
+          <li>✔ Standard Work documentation + visual systems</li>
+          <li>✔ Waste analysis & production flow optimization</li>
         </ul>
 
         <RouterLink to="/contact" class="cta inline-block mt-4">
-          Start a Lean Consultation
+          Book Your Consultation
         </RouterLink>
       </div>
     </BaseSection>
@@ -43,10 +43,10 @@ import BaseSection from '@/components/BaseSection.vue'
   margin-bottom: 2rem;
 }
 .feature-list li {
-  position: relative;
   padding-left: 1.5rem;
   margin-bottom: 1rem;
   font-size: 1rem;
+  position: relative;
   color: var(--color-text);
 }
 .feature-list li::before {

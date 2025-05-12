@@ -34,6 +34,16 @@ const routes = [
     },
   },
   {
+    path: '/PrivacyPolicyView',
+    name: 'PrivacyPolicy',
+    component: () => import('@/views/PrivacyPolicyView.vue'),
+    meta: {
+      title: 'Privacy Policy – WeCr8 Solutions',
+      ogTitle: 'Privacy Policy – WeCr8 Solutions',
+      ogDescription: 'Learn about our privacy practices and commitment to data protection.',
+    },
+  },
+  {
     path: '/search',
     name: 'Search',
     component: () => import('@/views/SearchView.vue'),
