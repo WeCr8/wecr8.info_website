@@ -7,19 +7,19 @@ import CardGrid from '@/components/CardGrid.vue'
 const coreFocus = [
   {
     title: 'Smart Tooling & Zoller Integration',
-    description: 'Digital tool libraries, Zoller setup, and CAM alignment.',
+    description: 'Structured tool libraries, presetting, inspection & CAM workflows for manufacturing accuracy.',
     link: '/services/tool-library',
     cta: 'Explore Tooling',
   },
   {
     title: 'Automation & CNC Optimization',
-    description: 'Workflow automation and CNC machine efficiency tuning.',
+    description: 'From DNC file delivery to machine signals and ERP sync—maximize output and eliminate downtime.',
     link: '/services/cnc-automation',
     cta: 'See Automation',
   },
   {
     title: 'Training & Workforce Development',
-    description: 'Educating machinists and programmers with modern skills.',
+    description: 'We train the next generation of machinists & programmers with lean methods and modern tech.',
     link: '/services/training',
     cta: 'View Training',
   },
@@ -28,58 +28,60 @@ const coreFocus = [
 
 <template>
   <div class="about">
-    <!-- 🔵 Hero -->
+    <!-- 🔵 Hero Section -->
     <HeroSection>
-      <template #title>About WeCr8 Solutions</template>
+      <template #title>WeCr8 Solutions | Modern Manufacturing. Real Results.</template>
       <template #subtext>
-        WeCr8 Solutions is a forward-thinking consulting group specializing in smart tooling systems,
-        automation strategies, and digital transformation for modern manufacturers. From shop floor to digital thread, we build precision-driven workflows that scale.
+        We partner with forward-thinking manufacturers to implement digital tooling ecosystems, automate operations, and empower teams—delivering measurable outcomes across aerospace, defense, and energy sectors.
       </template>
-      <RouterLink to="/contact" class="cta mt-4 inline-block">Get in Touch</RouterLink>
+      <RouterLink to="/contact" class="cta mt-4 inline-block">Connect with Our Team</RouterLink>
     </HeroSection>
 
-    <!-- 🛠 What Sets Us Apart -->
+    <!-- 🧠 Our Approach -->
     <BaseSection variant="white">
       <template #default>
-        <h2 class="text-2xl md:text-3xl font-bold text-heading text-center mb-10">
-          What Sets Us Apart
-        </h2>
+        <h2 class="text-3xl font-bold text-heading text-center mb-12">How We Drive Value</h2>
         <div class="grid md:grid-cols-3 gap-10 text-left">
           <div>
-            <h3 class="text-xl font-semibold text-heading mb-2">🛠 Smart Tooling Systems</h3>
+            <h3 class="text-xl font-semibold mb-2">🔧 Tooling Intelligence</h3>
             <p class="text-muted">
-              We design and structure intelligent tool libraries, enable Zoller presetting and inspection workflows, and integrate CAM-ready data with your CNC operations—building traceability from tool cradle to spindle.
+              From Zoller presetting and tool inspection to fully structured CAM libraries—we build the data backbone your machines rely on to perform with precision.
             </p>
           </div>
           <div>
-            <h3 class="text-xl font-semibold text-heading mb-2">🤖 CNC & Workflow Automation</h3>
+            <h3 class="text-xl font-semibold mb-2">⚙️ Connected Operations</h3>
             <p class="text-muted">
-              From DNC file delivery to machine readiness signals and ERP sync, we optimize your shop through connected processes, reducing downtime and unlocking throughput.
+              We implement DNC, machine signal mapping, and ERP integrations that turn fragmented workflows into a real-time production environment.
             </p>
           </div>
           <div>
-            <h3 class="text-xl font-semibold text-heading mb-2">📊 Process Optimization & Training</h3>
+            <h3 class="text-xl font-semibold mb-2">📚 Upskilling for Impact</h3>
             <p class="text-muted">
-              We assess your workflow—from quoting to machining—and provide hands-on training, lean strategies, and visual systems that elevate every team member’s output.
+              Lean training systems, visual standards, and operator workflows—built to scale your team's effectiveness without slowing production.
             </p>
           </div>
         </div>
       </template>
     </BaseSection>
 
-    <!-- 💡 Mission -->
+    <!-- 🚀 Mission Statement -->
     <BaseSection variant="light">
       <template #default>
         <div class="text-center max-w-4xl mx-auto py-16">
-          <h2 class="text-2xl md:text-3xl font-bold text-heading mb-4">Our Mission</h2>
+          <h2 class="text-3xl font-bold mb-4">Our Mission</h2>
           <p class="text-lg text-muted">
-            At WeCr8, our mission is to modernize manufacturing—from the way companies tool up to the way teams collaborate. We don’t just consult—we empower.
+            To accelerate the future of precision manufacturing—tool by tool, process by process, person by person.
           </p>
         </div>
       </template>
     </BaseSection>
 
-    <!-- 🔗 Core Services -->
-    <CardGrid :cards="coreFocus" />
+    <!-- 🔩 Core Service Offerings -->
+    <BaseSection variant="white">
+      <template #default>
+        <h2 class="text-3xl font-bold text-heading text-center mb-12">Our Core Focus Areas</h2>
+        <CardGrid :cards="coreFocus" />
+      </template>
+    </BaseSection>
   </div>
 </template>

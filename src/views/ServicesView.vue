@@ -6,19 +6,19 @@ import BaseSection from '@/components/BaseSection.vue'
 const serviceCards = [
   {
     title: 'Smart Tooling & Zoller Integration',
-    description: 'Digital tool libraries, Zoller setup, and CAM alignment.',
+    description: 'Digital tool libraries, Zoller setup, and CAM alignment. Streamline presetting and ensure repeatability.',
     link: '/services/tool-library',
     cta: 'Explore Tooling',
   },
   {
     title: 'Automation & CNC Optimization',
-    description: 'Workflow automation and CNC machine efficiency tuning.',
+    description: 'DNC systems, machine readiness tracking, ERP integration—real automation that eliminates delay.',
     link: '/services/cnc-automation',
-    cta: 'See Automation',
+    cta: 'Optimize CNC',
   },
   {
     title: 'Training & Workforce Development',
-    description: 'Educating machinists and programmers with modern skills.',
+    description: 'Upskill your team with lean workflows, hands-on instruction, and repeatable operator systems.',
     link: '/services/training',
     cta: 'View Training',
   },
@@ -27,15 +27,14 @@ const serviceCards = [
 
 <template>
   <div class="services">
-    <!-- 🔷 Hero Spotlight -->
+    <!-- 🔷 Hero Section -->
     <BaseSection variant="blue" align="center" padding="xl">
       <template #default>
         <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow">
-          Built for Modern Manufacturing
+          Solutions Engineered for the Shop Floor
         </h1>
         <p class="text-lg text-white/90 max-w-2xl mx-auto mb-6">
-          Our services drive real-world results across aerospace, energy, and advanced machining—
-          empowering teams through smarter tooling, connected automation, and targeted education.
+          WeCr8 Solutions delivers tooling, automation, and training services that align with real production needs—not just theory.
         </p>
         <RouterLink
           to="/contact"
@@ -47,9 +46,15 @@ const serviceCards = [
       </template>
     </BaseSection>
 
-    <!-- 🛠️ Service Cards -->
+    <!-- 🧩 Modular Service Offerings -->
     <BaseSection variant="white">
       <template #default>
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-3xl font-bold text-heading mb-3">What We Offer</h2>
+          <p class="text-muted text-lg">
+            Whether you’re modernizing your tool crib or preparing for lights-out machining—our services scale to your needs.
+          </p>
+        </div>
         <CardGrid :cards="serviceCards" />
       </template>
     </BaseSection>
