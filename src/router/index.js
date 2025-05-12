@@ -1,7 +1,4 @@
-// src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
-
-// 🏠 Eager-load Home
 import HomeView from '@/views/HomeView.vue'
 
 const routes = [
@@ -98,11 +95,10 @@ const router = createRouter({
   },
 })
 
-// 🧠 Global Meta Management + GA Tracking
 router.afterEach((to) => {
   const defaultTitle = 'WeCr8 Solutions'
   const defaultDesc = 'Smart Tooling, Automation, and Training Experts.'
-  const gaId = import.meta.env.VITE_GA_ID
+  const gaId = import.meta.env.VITE_GA4_ID
 
   document.title = to.meta?.title || defaultTitle
   document.documentElement.setAttribute('lang', 'en')
@@ -122,33 +118,27 @@ router.afterEach((to) => {
   updateMetaProperty('twitter:title', to.meta?.ogTitle || document.title)
   updateMetaProperty('twitter:description', to.meta?.ogDescription || defaultDesc)
 
-  // ✅ Google Analytics SPA Tracking (Production Only)
+  // ✅ GA4 SPA Tracking
   if (import.meta.env.PROD && gaId) {
-    injectGoogleAnalytics(gaId)
-    if (window.gtag) {
-      window.gtag('config', gaId, { page_path: to.fullPath })
-    }
+    if (!window.gtag) injectGA(gaId)
+    else window.gtag('config', gaId, { page_path: to.fullPath })
   }
 })
 
-// Inject GA only once
-function injectGoogleAnalytics(id) {
-  if (document.getElementById('ga4-script')) return
+function injectGA(id) {
+  const scriptTag = document.createElement('script')
+  scriptTag.src = `https://www.googletagmanager.com/gtag/js?id=${id}`
+  scriptTag.async = true
+  document.head.appendChild(scriptTag)
 
-  const script = document.createElement('script')
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`
-  script.async = true
-  script.id = 'ga4-script'
-  document.head.appendChild(script)
-
-  const inline = document.createElement('script')
-  inline.innerHTML = `
+  const inlineScript = document.createElement('script')
+  inlineScript.text = `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', '${id}');
   `
-  document.head.appendChild(inline)
+  document.head.appendChild(inlineScript)
 }
 
 function updateMetaTag(name, content) {
@@ -172,4 +162,4 @@ function updateMetaProperty(property, content) {
 }
 
 export default router
-
+export { routes, updateMetaTag, updateMetaProperty }
