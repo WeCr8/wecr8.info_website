@@ -1,19 +1,18 @@
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv } from 'vite'  // ✅ Only this one
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'node:path'
-import { loadEnv } from 'vite'
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')  // ✅ allows VITE_* to be loaded
+  const env = loadEnv(mode, process.cwd(), '')  // ✅ Use normally
 
   return {
     plugins: [
       vue(),
       vueDevTools(),
-      vueJsx(), // 🧩 Enable JSX/TSX support in Vue components
+      vueJsx(),
     ],
     resolve: {
       alias: {
@@ -22,7 +21,7 @@ export default defineConfig(({ mode }) => {
         '@components': path.resolve(__dirname, './src/components'),
         '@views': path.resolve(__dirname, './src/views'),
         '@composables': path.resolve(__dirname, './src/composables'),
-        '@utils': path.resolve(__dirname, './src/composables/utils'), // ✅ FIXED
+        '@utils': path.resolve(__dirname, './src/composables/utils'),
       },
     },
     define: {
@@ -41,7 +40,7 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks: {
             vue: ['vue', 'vue-router'],
-            //utils: ['@utils'],
+            utils: ['@utils'],
           },
         },
       },
