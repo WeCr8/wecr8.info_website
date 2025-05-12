@@ -29,7 +29,10 @@ const serviceCards = [
     <!-- 🚀 Hero Section -->
     <section class="section-blue" role="region" aria-label="WeCr8 Solutions Hero Section">
       <div class="container hero-content">
-        <h1 class="hero-title">WeCr8 Solutions: Precision. Automation. Results.</h1>
+        <h1 class="hero-title">
+          WeCr8 Solutions
+          <span class="hero-tagline">Precision&nbsp;|&nbsp;Automation&nbsp;|&nbsp;Results</span>
+        </h1>
         <p class="hero-subtext">
           Driving innovation across aerospace, energy, and advanced manufacturing with smart tooling, automation, and workforce education.
         </p>
@@ -80,6 +83,16 @@ const serviceCards = [
   margin-bottom: 1rem;
   color: #fff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  line-height: 1.2;
+}
+
+.hero-tagline {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+  color: #ffd;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtext {
@@ -112,6 +125,10 @@ const serviceCards = [
 @media (min-width: 768px) {
   .hero-title {
     font-size: 3rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.5rem;
   }
 }
 </style>
