@@ -1,9 +1,6 @@
-export function useScroll() {
-  const scrollY = ref(window.scrollY);
-  const onScroll = () => (scrollY.value = window.scrollY);
+// useScroll
+// Description: Add your logic here.
 
-  window.addEventListener('scroll', onScroll);
-  onUnmounted(() => window.removeEventListener('scroll', onScroll));
-
-  return { scrollY };
+export default function useScroll() {
+  // TODO: Implement logic
 }

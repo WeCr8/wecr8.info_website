@@ -1,10 +1,6 @@
-export function useThrottle(fn, limit = 300) {
-  let inThrottle;
-  return (...args) => {
-    if (!inThrottle) {
-      fn(...args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  };
+// useThrottle
+// Description: Add your logic here.
+
+export default function useThrottle() {
+  // TODO: Implement logic
 }

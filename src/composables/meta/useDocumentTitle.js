@@ -1,6 +1,6 @@
-// useDebounce
+// useDocumentTitle
 // Description: Add your logic here.
 
-export default function useDebounce() {
+export default function useDocumentTitle() {
   // TODO: Implement logic
 }

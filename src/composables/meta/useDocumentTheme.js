@@ -1,6 +1,6 @@
-// useDebounce
+// useDocumentTheme
 // Description: Add your logic here.
 
-export default function useDebounce() {
+export default function useDocumentTheme() {
   // TODO: Implement logic
 }

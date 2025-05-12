@@ -1,46 +1,37 @@
 // src/composables/index.js
 
-// ✅ Utility Hooks (Local use or Core Logic)
-export { default as useMeta } from './useMeta'
-export { default as useScroll } from './useScroll'
-export { default as useDebounce } from './useDebounce'
-export { default as useThrottle } from './useThrottle'
-export { default as useIntersectionObserver } from './useIntersectionObserver'
-export { default as useWindowSize } from './useWindowSize'
-export { default as useLocalStorage } from './useLocalStorage'
-export { default as useSessionStorage } from './useSessionStorage'
+// 🌐 Meta
+export { default as useMeta } from '@/composables/meta/useMeta'
+export { default as useDocumentTitle } from '@/composables/meta/useDocumentTitle'
+export { default as useDocumentDescription } from '@/composables/meta/useDocumentDescription'
+export { default as useDocumentTheme } from '@/composables/meta/useDocumentTheme'
+export { default as useDocumentViewport } from '@/composables/meta/useDocumentViewport'
 
-// ✅ Data Fetching Utilities
-export { default as useFetch } from './useFetch'
-export { default as useFetchGet } from './useFetchGet'
-export { default as useFetchPost } from './useFetchPost'
-export { default as useFetchPut } from './useFetchPut'
-export { default as useFetchDelete } from './useFetchDelete'
-export { default as useFetchPatch } from './useFetchPatch'
-export { default as useFetchJson } from './useFetchJson'
-export { default as useFetchForm } from './useFetchForm'
-export { default as useFetchText } from './useFetchText'
+// 🔍 Browser
+export { default as useScroll } from '@/composables/browser/useScroll'
+export { default as useWindowSize } from '@/composables/browser/useWindowSize'
+export { default as useIntersectionObserver } from '@/composables/browser/useIntersectionObserver'
 
-// ✅ Advanced Fetching (Optional Extensions)
-export { default as useFetchAbort } from './useFetchAbort'
-export { default as useFetchRetry } from './useFetchRetry'
-export { default as useFetchCache } from './useFetchCache'
-export { default as useFetchBlob } from './useFetchBlob'
-export { default as useFetchStream } from './useFetchStream'
-export { default as useFetchArrayBuffer } from './useFetchArrayBuffer'
+// 🧠 Utilities
+export { default as useDebounce } from '@/composables/utils/useDebounce'
+export { default as useThrottle } from '@/composables/utils/useThrottle'
 
-// ✅ Fetch Headers / Meta Extensions
-export { default as useFetchHeaders } from './useFetchHeaders'
-export { default as useFetchCredentials } from './useFetchCredentials'
-export { default as useFetchRedirect } from './useFetchRedirect'
-export { default as useFetchReferrer } from './useFetchReferrer'
-export { default as useFetchReferrerPolicy } from './useFetchReferrerPolicy'
-export { default as useFetchKeepalive } from './useFetchKeepalive'
-export { default as useFetchMode } from './useFetchMode'
-export { default as useFetchMethod } from './useFetchMethod'
-export { default as useFetchBody } from './useFetchBody'
-export { default as useFetchSignal } from './useFetchSignal'
-export { default as useFetchResponse } from './useFetchResponse'
+// 💾 Storage
+export { default as useLocalStorage } from '@/composables/storage/useLocalStorage'
+export { default as useSessionStorage } from '@/composables/storage/useSessionStorage'
 
-// ✅ Search (Router/Search integration)
-export { default as useSearch } from './useSearch'
+// 🌐 Fetch
+export { default as useFetch } from '@/composables/fetch/useFetch'
+export { default as useFetchGet } from '@/composables/fetch/useFetchGet'
+export { default as useFetchPost } from '@/composables/fetch/useFetchPost'
+export { default as useFetchJson } from '@/composables/fetch/useFetchJson'
+
+// 🔎 Search
+export { default as useSearch } from '@/composables/search/useSearch'
+export { default as useSearchQuery } from '@/composables/search/useSearchQuery'
+export { default as useSearchResults } from '@/composables/search/useSearchResults'
+export { default as useSearchFilters } from '@/composables/search/useSearchFilters'
+export { default as useSearchSort } from '@/composables/search/useSearchSort'
+export { default as useSearchPagination } from '@/composables/search/useSearchPagination'
+export { default as useSearchHistory } from '@/composables/search/useSearchHistory'
+export { default as useSearchSuggestions } from '@/composables/search/useSearchSuggestions'

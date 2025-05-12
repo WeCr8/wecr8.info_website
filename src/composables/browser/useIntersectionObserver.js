@@ -1,5 +1,6 @@
-export function useIntersectionObserver(target, callback, options = {}) {
-  let observer = new IntersectionObserver(callback, options);
-  onMounted(() => observer.observe(target.value));
-  onUnmounted(() => observer.disconnect());
+// useIntersectionObserver
+// Description: Add your logic here.
+
+export default function useIntersectionObserver() {
+  // TODO: Implement logic
 }

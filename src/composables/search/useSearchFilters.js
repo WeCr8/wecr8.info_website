@@ -1,6 +1,6 @@
-// useDebounce
+// useSearchFilters
 // Description: Add your logic here.
 
-export default function useDebounce() {
+export default function useSearchFilters() {
   // TODO: Implement logic
 }
