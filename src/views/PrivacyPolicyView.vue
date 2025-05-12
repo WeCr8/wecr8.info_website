@@ -5,40 +5,63 @@ import BaseSection from '@/components/BaseSection.vue'
 
 <template>
   <div class="privacy-policy">
+    <!-- 🔵 Hero -->
     <HeroSection>
       <template #title>Privacy Policy</template>
       <template #subtext>
-        We value your privacy. This page explains how WeCr8 Solutions collects, uses, and protects your information.
+        Your trust matters. Learn how WeCr8 Solutions collects, uses, and protects your data across our digital services.
       </template>
     </HeroSection>
 
-    <BaseSection variant="white" align="left">
-      <div class="max-w-4xl mx-auto text-left space-y-6 text-muted text-base">
+    <!-- 📃 Privacy Card Container -->
+    <BaseSection variant="white" align="center">
+      <div class="max-w-4xl w-full bg-white rounded-2xl shadow-lg p-8 md:p-10 space-y-10 text-left border border-gray-200">
         <section>
-          <h2 class="text-xl font-semibold text-heading mb-2">1. Information We Collect</h2>
-          <p>We may collect personal data such as your name, email, company, and job title when submitted through forms. We also collect anonymized usage data via Google Analytics.</p>
+          <h2 class="text-2xl font-bold text-heading mb-3">1. Information We Collect</h2>
+          <p class="text-muted">
+            We collect data you provide through contact forms—such as your name, email address, company, and job title.
+            We also gather anonymized usage data through Google Analytics (GA4) to help improve our services.
+          </p>
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold text-heading mb-2">2. How We Use Your Data</h2>
-          <p>We use your information to respond to inquiries, improve site performance, and offer relevant services. We do not sell or share your information without consent.</p>
+          <h2 class="text-2xl font-bold text-heading mb-3">2. How We Use Your Data</h2>
+          <p class="text-muted">
+            Your information helps us respond to inquiries, improve your experience, and recommend relevant services.
+            We never sell or share your personal data without consent.
+          </p>
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold text-heading mb-2">3. Analytics & Cookies</h2>
-          <p>We use Google Analytics (GA4) to monitor user activity and optimize site functionality. This may include anonymized IPs and behavioral metrics.</p>
+          <h2 class="text-2xl font-bold text-heading mb-3">3. Analytics & Cookies</h2>
+          <p class="text-muted">
+            We use Google Analytics (GA4) to analyze traffic. This includes anonymized IPs, behavior, and device info.
+            You may disable cookies through your browser settings.
+          </p>
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold text-heading mb-2">4. Data Security</h2>
-          <p>We implement industry-standard protections to safeguard data. However, no method is 100% secure.</p>
+          <h2 class="text-2xl font-bold text-heading mb-3">4. Data Security</h2>
+          <p class="text-muted">
+            We implement industry-standard encryption and safeguards. Still, no system can guarantee complete security.
+          </p>
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold text-heading mb-2">5. Contact Us</h2>
-          <p>If you have any questions about this policy, please contact us at <strong>info@wecr8.info</strong>.</p>
+          <h2 class="text-2xl font-bold text-heading mb-3">5. Contact Us</h2>
+          <p class="text-muted">
+            If you have questions, please email us at
+            <a href="mailto:info@wecr8.info" class="text-accent hover:underline">info@wecr8.info</a>.
+          </p>
         </section>
       </div>
     </BaseSection>
   </div>
 </template>
+
+<style scoped>
+.text-accent {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+</style>
