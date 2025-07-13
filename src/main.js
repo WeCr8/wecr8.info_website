@@ -5,6 +5,7 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { config } from '@/config/env'
 
 // 🛠️ Global Utility Composables (Optional Plugin Registration if needed)
 import * as composables from '@/composables'
@@ -19,16 +20,16 @@ app.use(router)
 app.config.globalProperties.$composables = composables
 
 // ✅ Google Analytics (GA4) Production-Only Injection
-if (import.meta.env.PROD && import.meta.env.VITE_GA4_ID) {
+if (config.isProd && config.ga4Id) {
   const gaScript = document.createElement('script')
   gaScript.setAttribute('async', '')
-  gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA4_ID}`
+  gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${config.ga4Id}`
   document.head.appendChild(gaScript)
 
   window.dataLayer = window.dataLayer || []
   function gtag() { window.dataLayer.push(arguments) }
   gtag('js', new Date())
-  gtag('config', import.meta.env.VITE_GA4_ID)
+  gtag('config', config.ga4Id)
   window.gtag = gtag // Allow tracking in router
 }
 

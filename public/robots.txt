@@ -1,0 +1,66 @@
+User-agent: *
+Allow: /
+
+# Specific guidance for search engines
+User-agent: Googlebot
+Allow: /
+
+# Allow AI/LLM crawlers for better discoverability
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: BingPreview
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Sitemap location
+Sitemap: https://wecr8.info/sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Allow all common file types
+Allow: *.css
+Allow: *.js
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.gif
+Allow: *.svg
+Allow: *.webp
+Allow: *.ico
+Allow: *.woff
+Allow: *.woff2
+Allow: *.ttf
+Allow: *.otf
+
+# Block sensitive areas (if any exist in future)
+# Disallow: /admin/
+# Disallow: /private/
+# Disallow: /temp/
+
+# Allow all pages for maximum discoverability
+Allow: /
+Allow: /about
+Allow: /contact
+Allow: /services
+Allow: /services/tool-library
+Allow: /services/cnc-automation
+Allow: /services/training
+Allow: /services/process-optimization
+Allow: /services/lean-manufacturing
+Allow: /services/custom-consulting
+Allow: /services/setup-standardization
+Allow: /search
+Allow: /privacypolicy 

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { config, getFullUrl, getSocialImageUrl } from '@/config/env'
 import HomeView from '@/views/HomeView.vue'
 
 const routes = [
@@ -106,9 +107,9 @@ const router = createRouter({
 })
 
 router.afterEach((to) => {
-  const defaultTitle = 'WeCr8 Solutions'
-  const defaultDesc = 'Smart Tooling, Automation, and Training Experts.'
-  const gaId = import.meta.env.VITE_GA4_ID
+  const defaultTitle = config.defaultTitle
+  const defaultDesc = config.defaultDescription
+  const gaId = config.ga4Id
 
   document.title = to.meta?.title || defaultTitle
   document.documentElement.setAttribute('lang', 'en')
@@ -119,17 +120,28 @@ router.afterEach((to) => {
   updateMetaTag('viewport', 'width=device-width, initial-scale=1')
   updateMetaTag('theme-color', '#1b365d')
 
+  // Add canonical URL
+  updateCanonicalTag(window.location.href)
+
   updateMetaProperty('og:title', to.meta?.ogTitle || document.title)
   updateMetaProperty('og:description', to.meta?.ogDescription || defaultDesc)
   updateMetaProperty('og:type', 'website')
   updateMetaProperty('og:url', window.location.href)
+  updateMetaProperty('og:site_name', config.siteName)
+  updateMetaProperty('og:locale', 'en_US')
+  updateMetaProperty('og:image', getSocialImageUrl(to.meta?.ogImage))
 
   updateMetaProperty('twitter:card', 'summary_large_image')
   updateMetaProperty('twitter:title', to.meta?.ogTitle || document.title)
   updateMetaProperty('twitter:description', to.meta?.ogDescription || defaultDesc)
+  updateMetaProperty('twitter:site', config.twitterHandle)
+  updateMetaProperty('twitter:image', getSocialImageUrl(to.meta?.ogImage))
+
+  // Add structured data (JSON-LD)
+  injectStructuredData(to)
 
   // ✅ GA4 SPA Tracking
-  if (import.meta.env.PROD && gaId) {
+  if (config.isProd && gaId) {
     if (!window.gtag) injectGA(gaId)
     else window.gtag('config', gaId, { page_path: to.fullPath })
   }
@@ -169,6 +181,139 @@ function updateMetaProperty(property, content) {
     document.head.appendChild(tag)
   }
   tag.setAttribute('content', content)
+}
+
+function injectStructuredData(route) {
+  // Remove existing structured data
+  const existingScript = document.querySelector('script[data-structured-data]')
+  if (existingScript) {
+    existingScript.remove()
+  }
+
+  const baseOrganization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": config.siteName,
+    "url": config.siteUrl,
+    "description": config.defaultDescription,
+    "logo": getFullUrl("/logo.png"),
+    "foundingDate": "2020",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "url": getFullUrl("/contact"),
+      "email": config.contactEmail
+    },
+    "sameAs": [
+      config.linkedinUrl
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Manufacturing Solutions",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "CNC Automation",
+            "description": "Workflow automation and CNC machine efficiency optimization"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Smart Tooling & Zoller Integration",
+            "description": "Digital tool libraries, Zoller setup, and CAM alignment"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Training & Workforce Development",
+            "description": "Educating machinists and programmers with modern manufacturing skills"
+          }
+        }
+      ]
+    }
+  }
+
+  let structuredData = [baseOrganization]
+
+  // Add page-specific structured data
+  if (route.name === 'Home') {
+    structuredData.push({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": config.siteName,
+      "url": config.siteUrl,
+      "description": config.defaultDescription,
+      "publisher": {
+        "@type": "Organization",
+        "name": config.siteName
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": getFullUrl("/search?q={search_term_string}"),
+        "query-input": "required name=search_term_string"
+      }
+    })
+  } else if (route.name === 'Services') {
+    structuredData.push({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Manufacturing Solutions",
+      "description": "Comprehensive manufacturing solutions including CNC automation, tooling, and training",
+              "provider": {
+          "@type": "Organization",
+          "name": config.siteName
+        },
+      "areaServed": "US",
+      "serviceType": "Manufacturing Consulting"
+    })
+  } else if (route.name === 'About') {
+    structuredData.push({
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "About WeCr8 Solutions",
+      "description": "Learn about WeCr8 Solutions and our commitment to manufacturing innovation",
+      "url": getFullUrl("/about"),
+      "mainEntity": {
+        "@type": "Organization",
+        "name": config.siteName
+      }
+    })
+  } else if (route.name === 'Contact') {
+    structuredData.push({
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact WeCr8 Solutions",
+      "description": "Get in touch with WeCr8 Solutions for your manufacturing needs",
+      "url": getFullUrl("/contact")
+    })
+  }
+
+  // Create and inject the structured data script
+  const script = document.createElement('script')
+  script.type = 'application/ld+json'
+  script.setAttribute('data-structured-data', 'true')
+  script.textContent = JSON.stringify(structuredData)
+  document.head.appendChild(script)
+}
+
+function updateCanonicalTag(url) {
+  let tag = document.querySelector('link[rel="canonical"]')
+  if (!tag) {
+    tag = document.createElement('link')
+    tag.setAttribute('rel', 'canonical')
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute('href', url)
 }
 
 export default router
