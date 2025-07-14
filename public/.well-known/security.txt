@@ -1,0 +1,17 @@
+Contact: mailto:security@wecr8.info
+Contact: https://wecr8.info/contact
+Preferred-Languages: en
+Canonical: https://wecr8.info/.well-known/security.txt
+Policy: https://wecr8.info/privacypolicy
+Hiring: https://wecr8.info/contact
+
+# Security Policy
+# Report security vulnerabilities responsibly
+# We take security seriously and will respond promptly to reports
+
+# Scope
+# This security policy applies to:
+# - https://wecr8.info and all subdomains
+# - All WeCr8 Solutions web applications and services
+
+# Please do not test against our production systems without permission 

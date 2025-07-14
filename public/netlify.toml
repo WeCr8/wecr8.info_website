@@ -1,0 +1,81 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[dev]
+  command = "npm run dev"
+  port = 3000
+
+# Security headers for all paths
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Content Security Policy
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    
+    # HTTP Strict Transport Security
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
+    # Prevent clickjacking
+    X-Frame-Options = "DENY"
+    
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # Enable XSS protection
+    X-XSS-Protection = "1; mode=block"
+    
+    # Referrer Policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Permissions Policy
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), vr=(), accelerometer=(), gyroscope=(), magnetometer=(), clipboard-read=(), clipboard-write=(), speaker=()"
+    
+    # Cache Control
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Specific headers for assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Specific headers for fonts
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+
+# Security headers for security.txt
+[[headers]]
+  for = "/.well-known/security.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+
+# Redirect rules for security
+[[redirects]]
+  from = "/security.txt"
+  to = "/.well-known/security.txt"
+  status = 301
+
+# HTTPS redirect
+[[redirects]]
+  from = "http://wecr8.info/*"
+  to = "https://wecr8.info/:splat"
+  status = 301
+  force = true
+
+# WWW redirect (if needed)
+[[redirects]]
+  from = "https://www.wecr8.info/*"
+  to = "https://wecr8.info/:splat"
+  status = 301
+  force = true
+
+# SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 

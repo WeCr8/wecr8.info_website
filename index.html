@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+    <!-- 🔐 Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), vr=(), accelerometer=(), gyroscope=(), magnetometer=(), clipboard-read=(), clipboard-write=(), speaker=()" />
+
     <!-- 🌐 Title & Branding -->
     <title>WeCr8 Solutions – Precision Tooling & CNC Innovation</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -59,10 +67,19 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- 🧾 Fonts & Fallback -->
+    <!-- 🔒 Security & Privacy -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    <!-- 🧾 Fonts & Fallback (Optimized for Security) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
+    </noscript>
     
     <!-- 📄 Additional Meta for LLMs -->
     <meta name="classification" content="Business" />
@@ -79,17 +96,31 @@
     <meta name="application-name" content="WeCr8 Solutions" />
     <meta name="format-detection" content="telephone=no" />
     
+    <!-- 🎨 Fallback Font Stack -->
     <style>
       body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
       }
+      
+      /* Prevent Flash of Unstyled Content */
+      .font-loading {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      }
     </style>
   </head>
 
-  <body>
+  <body class="font-loading">
     <div id="app"></div>
 
     <!-- 🚀 Vite Entry -->
     <script type="module" src="/src/main.js"></script>
+    
+    <!-- 📊 Font Loading Optimization -->
+    <script>
+      // Remove font-loading class once fonts are loaded
+      document.fonts.ready.then(() => {
+        document.body.classList.remove('font-loading');
+      });
+    </script>
   </body>
 </html>

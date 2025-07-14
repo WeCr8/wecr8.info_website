@@ -1,0 +1,50 @@
+/*
+  # Security Headers to Prevent DNS Warnings
+
+  # Content Security Policy - Prevents XSS and other attacks
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+  # HTTP Strict Transport Security - Force HTTPS
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Prevent clickjacking
+  X-Frame-Options: DENY
+
+  # Prevent MIME type sniffing
+  X-Content-Type-Options: nosniff
+
+  # Enable XSS protection
+  X-XSS-Protection: 1; mode=block
+
+  # Referrer Policy
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permissions Policy
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), vr=(), accelerometer=(), gyroscope=(), magnetometer=(), clipboard-read=(), clipboard-write=(), speaker=()
+
+  # Feature Policy (for older browsers)
+  Feature-Policy: geolocation 'none'; microphone 'none'; camera 'none'; payment 'none'; usb 'none'; vr 'none'
+
+  # Expect-CT Header
+  Expect-CT: max-age=86400, enforce
+
+  # Cache Control for security
+  Cache-Control: public, max-age=31536000, immutable
+
+# Additional headers for static assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon.ico
+  Cache-Control: public, max-age=31536000
+
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+# Security headers for API endpoints (if any)
+/api/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache, no-store, must-revalidate 

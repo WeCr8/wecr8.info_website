@@ -140,10 +140,22 @@ router.afterEach((to) => {
   // Add structured data (JSON-LD)
   injectStructuredData(to)
 
-  // ✅ GA4 SPA Tracking
-  if (config.isProd && gaId) {
-    if (!window.gtag) injectGA(gaId)
-    else window.gtag('config', gaId, { page_path: to.fullPath })
+  // ✅ GA4 SPA Tracking with Enhanced Security
+  if (config.isProd && gaId && window.gtag) {
+    try {
+      // Privacy-focused page tracking
+      window.gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: to.fullPath,
+        // Privacy settings
+        anonymize_ip: true,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false
+      })
+    } catch (error) {
+      console.warn('Analytics tracking failed:', error)
+    }
   }
 })
 
